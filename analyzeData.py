@@ -10,3 +10,5 @@ def readInput(filename):
         for row in reader:
             print row[1]
     
+
+

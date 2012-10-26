@@ -3,9 +3,15 @@
 ###############################
 
 # Imports
+# External modules
 import scipy as sp
 import matplotlib as ml
 import matplotlib.pyplot as pp
 
-a = sp.arange(10)
-print a
+# Our modules
+import analyzeData as ad
+
+print "hello, world"
+ad.readInput("test.txt")
+
+    

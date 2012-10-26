@@ -1,0 +1,9 @@
+To do:
+
+main.py:
+plot count rate per time
+plot histogram of count rate in bins of width t
+
+
+analyzeData.py:
+methods that return list of time intervals and the corresponding counts
