@@ -2,6 +2,10 @@
 
 import csv
 
+class dataSet:
+    counts = []
+    times = []
+
 def readInput(filename):
     with open(filename, 'rb') as csvfile:
         # If a dict is desired, change to csv.DictReader() with the same arguments.
@@ -10,5 +14,3 @@ def readInput(filename):
         for row in reader:
             print row[1]
     
-
-
