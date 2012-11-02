@@ -18,12 +18,14 @@ def plotCountRatePerTime(data, timeResolution = None):
     default is data.maxTimeResolution (i.e. do nothing).'''
 
 
+    # Rebin if necessary
     if timeResolution:
-        data.rebin(timeResolution)
+        data = data.rebin(timeResolution)
 
     times = sp.array(data.times)
     counts = sp.array(data.counts)
 
+    # Plot
     pp.plot(times, counts)
     pp.show()
 
@@ -40,13 +42,19 @@ def plotHistOfCountRates(data, timeResolution = None, numOfBins = 10):
     # Make a histogram of the count rates from the DataSet
     hist, bin_edges = sp.histogram(data.counts, numOfBins)
 
-    pp.plot(bin_edges, hist, '_')
+    print len(hist)
+    print len(bin_edges)
+
+    pp.plot(bin_edges[range(len(bin_edges) - 1)], hist, 'ro')
     pp.show()
 
 def main():
     '''All times are in seconds'''
     data = ad.readInput('test.txt')
-    plotCountRatePerTime(data)
+    plotCountRatePerTime(data, 2)
+    pp.clf()
+    plotHistOfCountRates(data)
+    
 
 
 main()
