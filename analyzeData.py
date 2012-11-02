@@ -51,6 +51,7 @@ class HighFrequenyData(DataSet):
         super(HighFrequenyData, self).__init__(count, time)
         
     def timeBetweenCounts():
+        '''Calculates the time between each count and returns these times as a list of floats'''
         print "Nothing implemented yet"
     
 def readInput(filename):
