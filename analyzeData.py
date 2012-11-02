@@ -1,20 +1,31 @@
 #!/usr/bin/env python
 
 import csv
-import scipy as sp
 
+# All times must be in seconds
 class DataSet:
     def __init__ (self, count = [], time = []):
-        # Defines counts and times lists, while ensuring that the data being passed in is actually
-        # a number (based on the data read using csv.reader(), these lists are actually strings containing
-        # numbers, but this format of the data works fine with matplotlib).
-        self.counts = [value for value in count if value.isdigit() == True]
-        self.times = [value for value in time if value.isdigit() == True]
+        # Defines lists of floats for counts and times
+        self.counts = count
+        self.times = times
         
         # maxTimeResolution defines the binWidth (the time between each sampling of the data).
         # This is a number
-        self.maxTimeResolution = abs(float(self.times[len(self.times)-1]) - float(self.times[len(self.times)-2]))
+        self.maxTimeResolution = abs(self.times[len(self.times)-1] - self.times[len(self.times)-2])
+    
+    def rebin(self, newBinWidth):
+        # Determine the factor by which to scale the bins
+        rebinningFactor = newBinWidth/self.maxTimeResolution
         
+        newCounts = []
+        newTimes = []
+        for i in range(0,len(self.times)/rebinningFactor):
+            newCounts.append( sum( self.counts[ newBinWidth*i : newBinWidth*(i+1) ] ))
+            newTimes.append(newBinWidth*i)
+        
+        newDataSet = DataSet(newCounts, newTimes)
+        
+        return newDataSet
     
 def readInput(filename):
     with open(filename, 'rb') as csvfile:
@@ -28,21 +39,15 @@ def readInput(filename):
             time.append(row[0])
             count.append(row[1])
     
+    # Ensures that the data being passed in is actually a number (based on the data read using
+    # csv.reader(), these lists are actually strings containing numbers, so this format must be
+    # converted into numbers using float()).
+    count = [float(value) for value in count if value.isdigit() == True]
+    time = [float(value) for value in time if value.isdigit() == True]
+    
     data = DataSet(count, time)
     
     print data.counts
     print data.times
     print data.maxTimeResolution
     return data
-
-def rebin( a, newshape):
-    '''Rebin an array to a new shape.
-       newshape must be a factor of a.shape.
-       Source: http://www.scipy.org/Cookbook/Rebinning
-    '''
-
-    assert len(a.shape) == len(newshape)
-    assert not sp.sometrue(sp.mod( a.shape, newshape ))
-
-    slices = [ slice(None,None, old/new) for old,new in zip(a.shape,newshape) ]
-    return a[slices]
