@@ -4,6 +4,7 @@ import csv
 
 # All times must be in seconds
 class DataSet:
+    '''Basic class that contains counts and time, as well as defining a rebinning function'''
     def __init__ (self, count = [], time = []):
         # Defines lists of floats for counts and times
         self.counts = count
@@ -13,6 +14,7 @@ class DataSet:
         self.maxTimeResolution = abs(self.times[len(self.times)-1] - self.times[len(self.times)-2])
     
     def rebin(self, newBinWidth):
+        '''Rebins data for some arbitrary multiple of the maxTimeResolution. A new object is returned'''
         # Determine the factor by which to scale the bins
         rebinningFactor = newBinWidth/self.maxTimeResolution
         
@@ -41,8 +43,19 @@ class DataSet:
         newDataSet = DataSet(newCounts, newTimes)
         
         return newDataSet
+        
+class HighFrequenyData(DataSet):
+    ''' Class derived from DataSet that deals with a small maxTimeResolution. This data should be sampled
+        at a high enough rate that at most there is one count per bin.'''
+    def __init__(self, count = [], time =[]):
+        super(HighFrequenyData, self).__init__(count, time)
+        
+    def timeBetweenCounts():
+        print "Nothing implemented yet"
     
 def readInput(filename):
+    ''' Basic function that raeds tab seperated input from text files and processes it into
+        lists of floats of times and counts'''
     with open(filename, 'rb') as csvfile:
         # csv.reader returns a list containing strings, from a tab seperated text file.
         # Based on data taken with PRA 5, the first element in entry of the list it the time,
