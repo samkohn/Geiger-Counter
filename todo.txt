@@ -2,7 +2,8 @@ To do:
 
 main.py:
 plot count rate per time
-plot histogram of count rate in bins of width t
+plot count rate in bins of width t
+plot histogram of count rates over many samples
 
 
 analyzeData.py:

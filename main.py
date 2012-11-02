@@ -18,7 +18,7 @@ def rebin_factor( a, newshape ):
     '''
 
     assert len(a.shape) == len(newshape)
-    assert not sometrue(mod( a.shape, newshape ))
+    assert not sp.sometrue(sp.mod( a.shape, newshape ))
 
     slices = [ slice(None,None, old/new) for old,new in zip(a.shape,newshape) ]
     return a[slices]
@@ -26,15 +26,15 @@ def rebin_factor( a, newshape ):
 def plotCountRatePerTime(data, timeResolution = None):
     '''Plot the count rate per time using a given
     time resolution.  If timeResolution is blank then the
-    default is data.maxTimeResolution.'''
+    default is data.maxTimeResolution (i.e. do nothing).'''
 
     times = sp.array(data.times)
     counts = sp.array(data.counts)
 
     if timeResolution:
         numBinsToCombine = timeResolution/data.maxTimeResolution
-        
-
+        times = ad.rebin(times, numBinsToCombine)
+        counts = ad.rebin(counts, numBinsToCombine)
 
 
     pp.plot(times, counts)
