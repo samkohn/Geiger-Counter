@@ -19,7 +19,7 @@ class DataSet:
         
         newCounts = []
         newTimes = []
-        for i in range(0,len(self.times)/rebinningFactor):
+        for i in range(0,int(len(self.times)/rebinningFactor)):
             newCounts.append( sum( self.counts[ newBinWidth*i : newBinWidth*(i+1) ] ))
             newTimes.append(newBinWidth*i)
         
