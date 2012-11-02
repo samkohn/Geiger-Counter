@@ -2,9 +2,9 @@
 
 import csv
 
-class dataSet:
+class DataSet:
     def __init__ (self, count = [], time = []):
-        counts = cout
+        counts = count
         times = time
 
 def readInput(filename):
@@ -14,4 +14,4 @@ def readInput(filename):
         reader = csv.reader(csvfile, delimiter='\t')
         for row in reader:
             print row[1]
-    
+        
