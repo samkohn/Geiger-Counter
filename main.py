@@ -19,10 +19,9 @@ def plotObject(obj):
     pp.show()
 
 def main():
-    counts = list(sp.random.randint(1, 30, 10))
-    times = range(10)
-    data = ad.DataSet(counts, times)
+    data = ad.readInput('test.txt')
     plotObject(data)
+
     #array = sp.linspace(1,10)
     #print array
     #pp.plot(array,array, 'ro')
