@@ -11,7 +11,13 @@ import matplotlib.pyplot as pp
 # Our modules
 import analyzeData as ad
 
-print "hello, world"
-ad.readInput("test.txt")
+def main():
+    #print "hello, world"
+    #ad.readInput("test.txt")
+    array = sp.linspace(1,10)
+    print array
+    pp.plot(array,array, 'ro')
+    pp.show()
 
-    
+
+main()
