@@ -25,3 +25,4 @@ def readInput(filename):
     
     print data.counts
     print data.times
+    return data
