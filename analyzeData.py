@@ -6,7 +6,7 @@ class DataSet:
     def __init__ (self, count = [], time = []):
         self.counts = count
         self.times = time
-        self.maxTimeResolution = abs(self.times[len(self.times)-1] - self.times[len(self.times)-2])
+        self.maxTimeResolution = abs(float(self.times[len(self.times)-1]) - float(self.times[len(self.times)-2]))
         
 
 def readInput(filename):
@@ -20,12 +20,14 @@ def readInput(filename):
             count.append(row[1])
             time.append(row[0])
     
-    #for c in counts:
-    #    if c.isdigit() != true
+    # Remove header strings
+    count = [value for value in count if value.isdigit() == True]
+    time = [value for value in time if value.isdigit() == True]
             
-    data = DataSet(count[1:], time[1:])
-    #data = DataSet(count, time)
+    #data = DataSet(count[1:], time[1:])
+    data = DataSet(count, time)
     
     print data.counts
     print data.times
+    print data.maxTimeResolution
     return data
