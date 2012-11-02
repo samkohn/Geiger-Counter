@@ -11,43 +11,42 @@ import matplotlib.pyplot as pp
 # Our modules
 import analyzeData as ad
 
-def rebin_factor( a, newshape ):
-    '''Rebin an array to a new shape.
-       newshape must be a factor of a.shape.
-       Source: http://www.scipy.org/Cookbook/Rebinning
-    '''
-
-    assert len(a.shape) == len(newshape)
-    assert not sp.sometrue(sp.mod( a.shape, newshape ))
-
-    slices = [ slice(None,None, old/new) for old,new in zip(a.shape,newshape) ]
-    return a[slices]
 
 def plotCountRatePerTime(data, timeResolution = None):
     '''Plot the count rate per time using a given
     time resolution.  If timeResolution is blank then the
     default is data.maxTimeResolution (i.e. do nothing).'''
 
-    times = sp.array(data.times)
-    counts = sp.array(data.counts)
 
     if timeResolution:
-        numBinsToCombine = timeResolution/data.maxTimeResolution
-        times = ad.rebin(times, numBinsToCombine)
-        counts = ad.rebin(counts, numBinsToCombine)
+        data.rebin(timeResolution)
 
+    times = sp.array(data.times)
+    counts = sp.array(data.counts)
 
     pp.plot(times, counts)
     pp.show()
 
+
+def plotHistOfCountRates(data, timeResolution = None, numOfBins = 10):
+    '''Plot the distribution of count rates. Splits the given DataSet
+    into separate 'samples' based on the timeResolution, so that 
+    numSamples = totalTime/timeResolution. If a time resolution is 
+    not given, the maximum possible is used for the DataSet given'''
+
+    if timeResolution:
+        data = data.rebin(timeResolution)
+
+    # Make a histogram of the count rates from the DataSet
+    hist, bin_edges = sp.histogram(data.counts, numOfBins)
+
+    pp.plot(bin_edges, hist, '_')
+    pp.show()
+
 def main():
+    '''All times are in seconds'''
     data = ad.readInput('test.txt')
     plotCountRatePerTime(data)
-
-    #array = sp.linspace(1,10)
-    #print array
-    #pp.plot(array,array, 'ro')
-    #pp.show()
 
 
 main()

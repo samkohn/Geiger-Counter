@@ -7,7 +7,7 @@ class DataSet:
     def __init__ (self, count = [], time = []):
         # Defines lists of floats for counts and times
         self.counts = count
-        self.times = times
+        self.times = time
         
         # maxTimeResolution defines the binWidth (the time between each sampling of the data).
         # This is a number
