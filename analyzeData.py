@@ -4,7 +4,7 @@ import csv
 
 # All times must be in seconds
 class DataSet:
-    '''Basic class that contains counts and time, as well as defining a rebinning function'''
+    ''' Basic class that contains counts and time, as well as defining a rebinning function'''
     def __init__ (self, count = [], time = []):
         # Defines lists of floats for counts and times
         self.counts = count
@@ -14,7 +14,7 @@ class DataSet:
         self.maxTimeResolution = abs(self.times[len(self.times)-1] - self.times[len(self.times)-2])
     
     def rebin(self, newBinWidth):
-        '''Rebins data for some arbitrary multiple of the maxTimeResolution. A new object is returned'''
+        ''' Rebins data for some arbitrary multiple of the maxTimeResolution. A new object is returned'''
         # Determine the factor by which to scale the bins
         rebinningFactor = newBinWidth/self.maxTimeResolution
         
@@ -51,7 +51,7 @@ class HighFrequenyData(DataSet):
         super(HighFrequenyData, self).__init__(count, time)
         
     def timeBetweenCounts():
-        '''Calculates the time between each count and returns these times as a list of floats'''
+        ''' Calculates the time between each count and returns these times as a list of floats'''
         print "Nothing implemented yet"
     
 def readInput(filename):
