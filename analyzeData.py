@@ -3,8 +3,9 @@
 import csv
 
 class dataSet:
-    counts = []
-    times = []
+    def __init__ (self, count = [], time = []):
+        counts = cout
+        times = time
 
 def readInput(filename):
     with open(filename, 'rb') as csvfile:
