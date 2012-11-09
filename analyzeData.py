@@ -74,9 +74,9 @@ class DataSet:
         
         return newDataSet
     
-    def countRate(self, sampleLength):
+    def countRate(self, sampleSize = 1):
         '''Gets an array with the count rates calculated in each interval of width sampleSize'''
-        numBins = int(self.duration / sampleSize)
+        numBins = int(self.fileLength / sampleSize)
 
         # Ignore all times after the last full bin
         maxTime = numBins * sampleSize
