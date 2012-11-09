@@ -6,12 +6,18 @@ import scipy.io.wavfile as wav
 # All times must be in seconds
 class DataSet:
     ''' Basic class that contains counts and time, as well as defining a rebinning function'''
-    def __init__ (self, time = [], rate = 96000):
+    def __init__ (self, time = [], rate = 96000, fLength = 0):
         # Defines lists of floats for times
         self.times = time
         
         # maxTimeResolution is a float that defines the binWidth (the time between each sampling of the data).
         self.maxTimeResolution = rate
+        
+        # fileLength describes how long the file is in seconds
+        self.fileLength = fLength
+        
+        # Define empty interval list, which will be filled by interval below
+        self.intervals = []
     
     @classmethod
     def fromFile(cls, filename):
@@ -30,9 +36,11 @@ class DataSet:
             else:
                 aboveThreshold = 1
                 times.append(float(i)/float(rate))
-
+        
+        fileLength = float(len(data))/float(rate)
+        
         print "numCounts = " + str(len(times))
-        return cls(times, rate)
+        return cls(times, rate, fileLength)
     
     def rebin(self, newBinWidth):
         ''' Rebins data for some arbitrary multiple of the maxTimeResolution. A new object is returned'''
@@ -65,29 +73,14 @@ class DataSet:
         
         return newDataSet
     
-def readInput(filename):
-    ''' Basic function that raeds tab seperated input from text files and processes it into
-        lists of floats of times and counts'''
-    with open(filename, 'rb') as csvfile:
-        # csv.reader returns a list containing strings, from a tab seperated text file.
-        # Based on data taken with PRA 5, the first element in entry of the list it the time,
-        # while the second is the rows
-        reader = csv.reader(csvfile, delimiter='\t')
-        count = []
-        time = []
-        for row in reader:
-            time.append(row[0])
-            count.append(row[1])
-    
-    # Ensures that the data being passed in is actually a number (based on the data read using
-    # csv.reader(), these lists are actually strings containing numbers, so this format must be
-    # converted into numbers using float()).
-    count = [float(value) for value in count if value.isdigit() == True]
-    time = [float(value) for value in time if value.isdigit() == True]
-    
-    data = DataSet(count, time)
-    
-    print data.counts
-    print data.times
-    print data.maxTimeResolution
-    return data
+    def countRate(self, sampleLength):
+        
+        
+    def interval(self):
+        self.intervals = []
+        
+        # len(self.times)-1 because the interval list will by definition be shorter than times by 1
+        for i in range(0,len(self.times)-1):
+            self.intervals.append(self.times[i+1] - self.times[i])
+            
+        return self.intervals
