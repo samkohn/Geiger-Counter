@@ -6,7 +6,7 @@ import scipy.io.wavfile as wav
 # All times must be in seconds
 class DataSet:
     ''' Basic class that contains counts and time, as well as defining a rebinning function'''
-    def __init__ (self, time = [], rate):
+    def __init__ (self, time = [], rate = 96000):
         # Defines lists of floats for times
         self.times = time
         
