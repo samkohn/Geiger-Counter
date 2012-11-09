@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import csv
+import scipy as sp
 import scipy.io.wavfile as wav
 
 # All times must be in seconds
@@ -16,8 +16,9 @@ class DataSet:
         # fileLength describes how long the file is in seconds
         self.fileLength = fLength
         
-        # Define empty interval list, which will be filled by interval below
+        # Define empty interval and countRate list, which will be filled by interval below
         self.intervals = []
+        self.countRates = []
     
     @classmethod
     def fromFile(cls, filename):
@@ -74,9 +75,20 @@ class DataSet:
         return newDataSet
     
     def countRate(self, sampleLength):
+        '''Gets an array with the count rates calculated in each interval of width sampleSize'''
+        numBins = int(self.duration / sampleSize)
+
+        # Ignore all times after the last full bin
+        maxTime = numBins * sampleSize
+
+        (rates, binEdges) = sp.histogram(self.times, numBins, (0, maxTime))
         
+        self.countRates = rates
+
+        return (rates, binEdges)
         
     def interval(self):
+        ''' Calculates the interval between each count, and returns a list with those intervals '''
         self.intervals = []
         
         # len(self.times)-1 because the interval list will by definition be shorter than times by 1

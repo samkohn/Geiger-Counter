@@ -9,7 +9,7 @@ def getCountRateArray(self, sampleSize = 1)
     # Ignore all times after the last full bin
     maxTime = numBins * sampleSize
 
-    rates = sp.histogram(self.times, numBins, (0, maxTime))
+    (rates, binEdges) = sp.histogram(self.times, numBins, (0, maxTime))
 
     print rates
-    return rates
+    return (rates, binEdges)
