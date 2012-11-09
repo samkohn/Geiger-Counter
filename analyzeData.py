@@ -22,6 +22,7 @@ class DataSet:
     
     @classmethod
     def fromFile(cls, filename):
+        ''' Effectively a overloaded constructor for pulling in data from a wave file '''
         (rate, data) = wav.read(filename)
 
         aboveThreshold = 0
