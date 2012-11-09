@@ -1,17 +1,38 @@
 #!/usr/bin/env python
 
 import csv
+import scipy.io.wavfile as wav
 
 # All times must be in seconds
 class DataSet:
     ''' Basic class that contains counts and time, as well as defining a rebinning function'''
-    def __init__ (self, count = [], time = []):
-        # Defines lists of floats for counts and times
-        self.counts = count
+    def __init__ (self, time = [], rate):
+        # Defines lists of floats for times
         self.times = time
         
         # maxTimeResolution is a float that defines the binWidth (the time between each sampling of the data).
-        self.maxTimeResolution = abs(self.times[len(self.times)-1] - self.times[len(self.times)-2])
+        self.maxTimeResolution = rate
+    
+    @classmethod
+    def fromFile(cls, filename):
+        (rate, data) = wav.read(filename)
+
+        aboveThreshold = 0
+        times = []
+        THRESHOLD = 15000
+        for i, level in enumerate(data):
+            if i % rate == 0:
+                print "Analyzed " + str(i/rate) + "seconds"
+            if level <= THRESHOLD:
+                aboveThreshold = 0
+            elif aboveThreshold == 1:
+                continue
+            else:
+                aboveThreshold = 1
+                times.append(float(i)/float(rate))
+
+        print "numCounts = " + str(len(times))
+        return cls(times, rate)
     
     def rebin(self, newBinWidth):
         ''' Rebins data for some arbitrary multiple of the maxTimeResolution. A new object is returned'''
@@ -43,16 +64,6 @@ class DataSet:
         newDataSet = DataSet(newCounts, newTimes)
         
         return newDataSet
-        
-class HighFrequenyData(DataSet):
-    ''' Class derived from DataSet that deals with a small maxTimeResolution. This data should be sampled
-        at a high enough rate that at most there is one count per bin.'''
-    def __init__(self, count = [], time =[]):
-        super(HighFrequenyData, self).__init__(count, time)
-        
-    def timeBetweenCounts():
-        ''' Calculates the time between each count and returns these times as a list of floats'''
-        print "Nothing implemented yet"
     
 def readInput(filename):
     ''' Basic function that raeds tab seperated input from text files and processes it into
