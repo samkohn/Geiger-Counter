@@ -21,8 +21,10 @@ class DataSet:
         self.countRates = []
     
     @classmethod
-    def fromFile(cls, filename):
-        ''' Effectively a overloaded constructor for pulling in data from a wave file '''
+    def fromFile(cls, filename, THRESHOLD = 15000)
+        ''' Effectively a overloaded constructor for pulling in data from a wave file. THRESHOLD is the level
+            above which a waveform can be considered a count. It range can be from 0 to 32768, constrained
+            by output values from the wave file.'''
         (rate, data) = wav.read(filename)
 
         aboveThreshold = 0
