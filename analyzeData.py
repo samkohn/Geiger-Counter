@@ -29,7 +29,6 @@ class DataSet:
 
         aboveThreshold = 0
         times = []
-        THRESHOLD = 15000
         for i, level in enumerate(data):
             if i % rate == 0:
                 print "Analyzed " + str(i/rate) + "seconds"
