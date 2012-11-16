@@ -49,7 +49,7 @@ class DataSet:
         ''' Calculates the dead time from two sample, along with a combined sample. The first three inputs to this
             function must be dataSet objects, while the sampleRate must be an a number, in seconds, in the same 
             form as would be passed getCountRate()'''
-        # Dead time is defined as \tao = (n1 + n2 - n12)/(2n1*n2)
+        # Dead time is defined as \tau = (n1 + n2 - n12)/(2n1*n2)
         n1 = firstSample.getCountRate(sampleRate)
         n2 = secondSample.getCountRate(sampleRate)
         n12 = combinedSample.getCountRate(sampleRate)
