@@ -68,7 +68,7 @@ class DataSet:
     
     def getCountRate(self, sampleSize = 1):
         ''' Gets an array with the count rates calculated in each interval 
-            of width sampleSize. Everything is in seconds'''
+            of width sampleSize. The input, sampleSize, is in seconds. It returns the rates in counts / second'''
         numBins = int(self.fileLength / sampleSize)
 
         # Ignore all times after the last full bin
@@ -76,9 +76,9 @@ class DataSet:
 
         (rates, binEdges) = sp.histogram(self.times, numBins, (0, maxTime))
         
-        self.countRates = rates
+        self.countRates = rates/sampleSize
 
-        return (rates, binEdges)
+        return (self.countRates, binEdges)
         
     def getInterval(self):
         ''' Calculates the interval between each count, and returns a list with those intervals '''
