@@ -45,7 +45,7 @@ class DataSet:
         return cls(times, rate, fileLength)
     
     @classmethod
-    def getDeadTime(cls, firstSample, secondSample, combinedSample, sampleRate = 1)
+    def getDeadTime(cls, firstSample, secondSample, combinedSample, sampleRate = 1):
         ''' Calculates the dead time from two sample, along with a combined sample. The first three inputs to this
             function must be dataSet objects, while the sampleRate must be an a number, in seconds, in the same 
             form as would be passed getCountRate()'''
