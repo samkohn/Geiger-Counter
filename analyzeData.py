@@ -44,6 +44,19 @@ class DataSet:
         print "numCounts = " + str(len(times))
         return cls(times, rate, fileLength)
     
+    @classmethod
+    def getDeadTime(cls, firstSample, secondSample, combinedSample, sampleRate = 1)
+        ''' Calculates the dead time from two sample, along with a combined sample. The first three inputs to this
+            function must be dataSet objects, while the sampleRate must be an a number, in seconds, in the same 
+            form as would be passed getCountRate()'''
+        # Dead time is defined as \tao = (n1 + n2 - n12)/(2n1*n2)
+        n1 = firstSample.getCountRate(sampleRate)
+        n2 = secondSample.getCountRate(sampleRate)
+        n12 = combinedSample.getCountRate(sampleRate)
+        deadTime = (n1 + n2 - n12)/(2*n1*n2)
+        
+        return deadTime
+    
     def rebin(self, newBinWidth):
         ''' Rebins data for some arbitrary multiple of the maxTimeResolution. A new object is returned'''
         # Determine the factor by which to scale the bins
@@ -75,9 +88,9 @@ class DataSet:
         
         return newDataSet
     
-    def countRate(self, sampleSize = 1):
-        '''Gets an array with the count rates calculated in each interval 
-        of width sampleSize'''
+    def getCountRate(self, sampleSize = 1):
+        ''' Gets an array with the count rates calculated in each interval 
+            of width sampleSize. Everything is in seconds'''
         numBins = int(self.fileLength / sampleSize)
 
         # Ignore all times after the last full bin
@@ -89,7 +102,7 @@ class DataSet:
 
         return (rates, binEdges)
         
-    def interval(self):
+    def getInterval(self):
         ''' Calculates the interval between each count, and returns a list with those intervals '''
         self.intervals = []
         
@@ -98,3 +111,8 @@ class DataSet:
             self.intervals.append(self.times[i+1] - self.times[i])
             
         return self.intervals
+    
+    def getTotalCounts(self):
+        ''' Returns the total number of counts in the sample. To compare this number, the length
+            of the recordings must be same '''
+        return len(self.times)
