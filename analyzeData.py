@@ -2,6 +2,7 @@
 
 import scipy as sp
 import scipy.io.wavfile as wav
+import pickle
 
 # All times must be in seconds
 class DataSet:
@@ -21,10 +22,10 @@ class DataSet:
         self.countRates = []
     
     @classmethod
-    def fromFile(cls, filename, THRESHOLD = 15000)
+    def fromWaveFile(cls, filename, THRESHOLD = 15000):
         ''' Effectively a overloaded constructor for pulling in data from a wave file. THRESHOLD is the level
             above which a waveform can be considered a count. It range can be from 0 to 32768, constrained
-            by output values from the wave file.'''
+            by output values from the (16 bit signed) wave file.'''
         (rate, data) = wav.read(filename)
 
         aboveThreshold = 0
@@ -46,6 +47,13 @@ class DataSet:
         return cls(times, rate, fileLength)
     
     @classmethod
+    def fromSavedFile(cls, filename = "dataSet.bin"):
+        fIn = open(filename, "rb")
+        newDataSet = pickle.load(fIn)
+        fIn.close()
+        return newDataSet
+    
+    @classmethod
     def getDeadTime(cls, firstSample, secondSample, combinedSample, sampleRate = 1):
         ''' Calculates the dead time from two sample, along with a combined sample. The first three inputs to this
             function must be dataSet objects, while the sampleRate must be an a number, in seconds, in the same 
@@ -57,37 +65,6 @@ class DataSet:
         deadTime = (n1 + n2 - n12)/(2*n1*n2)
         
         return deadTime
-    
-    def rebin(self, newBinWidth):
-        ''' Rebins data for some arbitrary multiple of the maxTimeResolution. A new object is returned'''
-        # Determine the factor by which to scale the bins
-        rebinningFactor = newBinWidth/self.maxTimeResolution
-        
-        # Define new variables to use in the rebinning
-        newCounts = []
-        newTimes = []
-        
-        # Determine range for i by subtracting the overflow from the length of times.
-        # This does truncate the data, but it is not a full bin, so it doesn't make sense
-        # to count as a bin.
-        overflow = len(self.times) % rebinningFactor
-        upperLimit = (len(self.times) - overflow) / rebinningFactor;
-        
-        for i in range(0, upperLimit):
-            # newTimes are determined by the index times the newBinWidth
-            newTimes.append(newBinWidth*i)
-            
-            # newCounts is the sum of all of the counts in all of the old bins that are
-            # consolidated in the new bin. The bounds are determined by newBinWidth*i and
-            # newBinWidth*(i+1). Further, this number is divided by a rebinningFactor
-            # to ensure that the return result is counts per second.
-            newCount = sum( self.counts[ newBinWidth*i : newBinWidth*(i+1) ] )
-            newCounts.append( newCount / rebinningFactor)
-            
-        # Create a new object to return, so we can keep the original data
-        newDataSet = DataSet(newCounts, newTimes)
-        
-        return newDataSet
     
     def getCountRate(self, sampleSize = 1):
         ''' Gets an array with the count rates calculated in each interval 
@@ -117,3 +94,42 @@ class DataSet:
         ''' Returns the total number of counts in the sample. To compare this number, the length
             of the recordings must be same '''
         return len(self.times)
+    
+    def save(self, filename = "dataSet.bin"):
+        fOut = open(filename, "wb")
+        
+        pickle.dump(self, fOut)
+        fOut.close()
+    
+    def rebin(self, newBinWidth):
+        ''' Rebins data for some arbitrary multiple of the maxTimeResolution. A new object is returned.
+            This function is generally deprecated, as any arbitrary count rate can now be calculated in
+            getCountRate()'''
+        # Determine the factor by which to scale the bins
+        rebinningFactor = newBinWidth/self.maxTimeResolution
+        
+        # Define new variables to use in the rebinning
+        newCounts = []
+        newTimes = []
+        
+        # Determine range for i by subtracting the overflow from the length of times.
+        # This does truncate the data, but it is not a full bin, so it doesn't make sense
+        # to count as a bin.
+        overflow = len(self.times) % rebinningFactor
+        upperLimit = (len(self.times) - overflow) / rebinningFactor;
+        
+        for i in range(0, upperLimit):
+            # newTimes are determined by the index times the newBinWidth
+            newTimes.append(newBinWidth*i)
+            
+            # newCounts is the sum of all of the counts in all of the old bins that are
+            # consolidated in the new bin. The bounds are determined by newBinWidth*i and
+            # newBinWidth*(i+1). Further, this number is divided by a rebinningFactor
+            # to ensure that the return result is counts per second.
+            newCount = sum( self.counts[ newBinWidth*i : newBinWidth*(i+1) ] )
+            newCounts.append( newCount / rebinningFactor)
+            
+        # Create a new object to return, so we can keep the original data
+        newDataSet = DataSet(newCounts, newTimes)
+        
+        return newDataSet
