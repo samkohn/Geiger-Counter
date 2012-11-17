@@ -3,9 +3,12 @@
 # The GUI package for python
 import Tkinter as tk
 import tkFileDialog as tkfd
+import tkMessageBox as tkmb
+import tkSimpleDialog as tksd
 
 # Our analysis tools
 import analyzeData as ad
+import PlotData as pd
 
 class App:
 
@@ -61,32 +64,32 @@ class App:
             #tk.Label(inputDialog, text=labelText).pack()
             #submitButton = tk.Button(inputDialog, text="OK", command=
 
-            dialog = InputDialog(self.root, "Count Rate", labelText)
-            binSpacing = dialog.getInput()
+            #dialog = InputDialog(self.root, "Count Rate", labelText)
+            binSpacing = tksd.askfloat("Count Rate", labelText, parent=self.root, minvalue=0)
             
 
-            print str(self.dataSet.getCountRate(binSpacing))
+            #print str(self.dataSet.getCountRate(binSpacing))
             #do something with the results
+            pd.plotCountRate(self.dataSet, binSpacing)
             
 
         else:
             #say that you need to import data first
-            pass
+            self.showImportAlert()
 
 
     def getIntervals(self):
         if self.dataSet:
             print self.dataSet.getInterval()
         else:
-            pass
+            self.showImportAlert()
 
     def getTotalCounts(self):
         if self.dataSet:
             print self.dataSet.getTotalCounts()
 
         else:
-            # That same need to import data
-            pass
+            self.showImportAlert()
 
 
 
@@ -98,7 +101,7 @@ class App:
             print "saved"
         else:
             #say that you need to import data first
-            pass
+            self.showImportAlert()
 
 
     def openBinary(self):
@@ -106,6 +109,9 @@ class App:
         self.dataSet = ad.DataSet.fromSavedFile(filename)
         print "opened"
 
+    def showImportAlert(self):
+        tkmb.showerror("No Data", "You need to import data first!")
+        
 
 
 
