@@ -21,8 +21,8 @@ class App:
         self.quitButton = tk.Button(frame, text="Quit", fg="red", command=frame.quit)
         self.quitButton.pack(side=tk.LEFT)
 
-        self.hiButton = tk.Button(frame, text="Say Hi!", command=self.sayHi)
-        self.hiButton.pack(side=tk.LEFT)
+        self.fileName = tk.Label(frame, text="No File")
+        self.fileName.pack(side=tk.BOTTOM)
 
         buttonFrame = tk.Frame(frame)
         self.addMenuButtons(frame)
@@ -30,16 +30,14 @@ class App:
 
         self.dataSet = None
 
-    def sayHi(self):
-        print "Hello, World!"
-
     def addMenuButtons(self, master):
         buttons = [
             ("Import .wav File", self.importWavFile),
             ("Import Saved Data", self.openBinary),
             ("Save Data to Disk", self.saveBinary),
-            ("Get Count Rate", self.getCountRate),
-            ("Get Intervals", self.getIntervals),
+            ("Plot Count Rate vs. Time", self.getCountRate),
+            ("Plot Count Rate Histogram", self.getCountRateHist),
+            ("Plot Intervals Histogram", self.getIntervals),
             ("Get Total Counts", self.getTotalCounts)
         ]
 
@@ -54,6 +52,7 @@ class App:
         print filename
         self.dataSet = ad.DataSet.fromWaveFile(filename)
         print "imported"
+        self.updateFileLabel(filename)
 
     def getCountRate(self):
         if self.dataSet:
@@ -75,18 +74,34 @@ class App:
 
         else:
             #say that you need to import data first
+
             self.showImportAlert()
 
+    def getCountRateHist(self):
+        if self.dataSet:
+            labelText = "Enter the number of bins"
+            numBins = tksd.askinteger("Count Rate Histogram", labelText, parent=self.root, minvalue=1)
+            labelText = "Enter the sample length (seconds)"
+            sampleLength = tksd.askfloat("Sample Length", labelText, parent=self.root, minvalue=0)
+            pd.plotHistOfCountRates(self.dataSet, sampleLength, numBins)
+
+        else:
+            self.showImportAlert()
 
     def getIntervals(self):
         if self.dataSet:
             print self.dataSet.getInterval()
+            labelText = "Enter the desired number of bins in the histogram"
+            numBins = tksd.askinteger("Intervals Histogram", labelText, parent=self.root, minvalue=1)
+            pd.plotHistOfIntervals(self.dataSet, numBins)
         else:
             self.showImportAlert()
 
     def getTotalCounts(self):
         if self.dataSet:
-            print self.dataSet.getTotalCounts()
+            totalCounts = self.dataSet.getTotalCounts()
+            print totalCounts
+            tkmb.showinfo("Total counts", str(totalCounts) + " counts total")
 
         else:
             self.showImportAlert()
@@ -108,39 +123,48 @@ class App:
         filename = tkfd.askopenfilename(initialdir=".", title="Open File")
         self.dataSet = ad.DataSet.fromSavedFile(filename)
         print "opened"
+        self.updateFileLabel(filename)
 
     def showImportAlert(self):
         tkmb.showerror("No Data", "You need to import data first!")
+
+    def updateFileLabel(self, filename):
+        if(str.find(filename, "/") >= 0):
+            path = str.split(filename, "/")
+            self.fileName.configure(text=path[1] + "/.../" + path[len(path)-1])
+        else:
+            path = str.split(filename, "\\")
+            self.fileName.configure(text=path[1] + "\\...\\" + path[len(path)-1])
         
 
 
 
-class InputDialog:
-    def __init__ (self, parent, title, label):
-        
-        self.window = tk.Toplevel(parent)
-        self.window.title(title)
-        self.parent = parent
-
-        self.label = tk.Label(self.window, text=label).pack()
-
-        self.spinbox = tk.Spinbox(self.window, from_=0, increment=0.1)
-        self.spinbox.pack(padx=5)
-
-        self.submitButton = tk.Button(self.window, text="OK", command=self.submit)
-        self.submitButton.pack(pady=5)
-        self.value = 0
-
-    def getInput(self):
-        self.parent.wait_window(self.window)
-        return self.value
-
-    def submit(self):
-        try:
-            self.value = float(self.spinbox.get())
-            self.window.destroy()
-        except TypeError:
-            self.label.configure(bg="red", text="Must be a number!")
+#class InputDialog:
+#    def __init__ (self, parent, title, label):
+#        
+#        self.window = tk.Toplevel(parent)
+#        self.window.title(title)
+#        self.parent = parent
+#
+#        self.label = tk.Label(self.window, text=label).pack()
+#
+#        self.spinbox = tk.Spinbox(self.window, from_=0, increment=0.1)
+#        self.spinbox.pack(padx=5)
+#
+#        self.submitButton = tk.Button(self.window, text="OK", command=self.submit)
+#        self.submitButton.pack(pady=5)
+#        self.value = 0
+#
+#    def getInput(self):
+#        self.parent.wait_window(self.window)
+#        return self.value
+#
+#    def submit(self):
+#        try:
+#            self.value = float(self.spinbox.get())
+#            self.window.destroy()
+#        except TypeError:
+#            self.label.configure(bg="red", text="Must be a number!")
 
 
 

@@ -27,26 +27,45 @@ def plotCountRate(data, timeResolution = 1):
     (rates, binEdges) = data.getCountRate(timeResolution)
 
     # Plot
-    pp.plot(binEdges[0:(len(binEdges)-1)],rates)
+    graph = pp.figure().add_subplot(111)
+
+    graph.plot(binEdges[0:(len(binEdges)-1)],rates)
+    graph.set_title("Count Rate. sample size = " + str(timeResolution) + " sec.")
     pp.show()
 
 
-def plotHistOfCountRates(data, timeResolution = None, numOfBins = 10):
+def plotHistOfCountRates(data, timeResolution = 1, numOfBins = 10):
     '''Plot the distribution of count rates. Splits the given DataSet
     into separate 'samples' based on the timeResolution, so that 
     numSamples = totalTime/timeResolution. If a time resolution is 
-    not given, the maximum possible is used for the DataSet given'''
+    not given, a default value of 1s is used'''
 
-    if timeResolution:
-        data = data.rebin(timeResolution)
+    #if timeResolution:
+    #    data = data.rebin(timeResolution)
+
+    (rates, binEdges) = data.getCountRate(timeResolution)
 
     # Make a histogram of the count rates from the DataSet
-    hist, bin_edges = sp.histogram(data.counts, numOfBins)
+    #(distribution, binEdges) = sp.histogram(rates, numOfBins)
 
-    print len(hist)
-    print len(bin_edges)
+    graph = pp.figure().add_subplot(111)
 
-    pp.plot(bin_edges[range(len(bin_edges) - 1)], hist, 'ro')
+    #graph.plot(binEdges[range(len(binEdges) - 1)], distribution, 'ro')
+    (n, bins, patches) = graph.hist(rates, numOfBins)
+    graph.set_title("Hist of count rates. " + str(numOfBins) + " bins, sample length " + str(timeResolution) + " sec, bin width = " + str(bins[1]-bins[0]) + " sec.")
+    pp.show()
+
+
+def plotHistOfIntervals(data, numOfBins = 10):
+    '''Plot a histogram of the time interval between consecutive counts'''
+
+    #hist, binEdges = sp.histogram(data.getInterval(), numOfBins)
+
+    graph = pp.figure().add_subplot(111)
+
+    #graph.plot(binEdges[0:(len(binEdges)-1)], hist)
+    (n, bins, patches) = graph.hist(data.getInterval(), numOfBins)
+    graph.set_title("Hist of interval between consecutive counts. " + str(numOfBins) + " bins, bin width = " + str(bins[1]-bins[0]) + " sec.")
     pp.show()
 
 def main():
