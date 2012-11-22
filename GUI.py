@@ -129,11 +129,11 @@ class App:
         tkmb.showerror("No Data", "You need to import data first!")
 
     def updateFileLabel(self, filename):
-        if(str.find(filename, "/") >= 0):
-            path = str.split(filename, "/")
+        if(filename.find("/") >= 0):
+            path = filename.split("/")
             self.fileName.configure(text=path[1] + "/.../" + path[len(path)-1])
         else:
-            path = str.split(filename, "\\")
+            path = filename.split("\\")
             self.fileName.configure(text=path[1] + "\\...\\" + path[len(path)-1])
         
 
