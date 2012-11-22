@@ -2,7 +2,3 @@
 *.swp
 *.pyc
 *.bin
-*.spec
-*.log
-build
-dist
