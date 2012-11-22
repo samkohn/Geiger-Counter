@@ -1,4 +1,5 @@
 from distutils.core import setup
 import py2exe
+import matplotlib
 
-setup(windows=['C:\Users\rehlers\Documents\GitHub\Geiger-Counter\GUI.py'])
+setup(data_files=matplotlib.get_py2exe_datafiles(),windows=["C:\\Users\\rehlers\\Documents\\GitHub\\Geiger-Counter\\GUI.py"])
