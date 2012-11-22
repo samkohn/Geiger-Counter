@@ -171,5 +171,6 @@ class App:
 root = tk.Tk()
 
 app = App(root)
+app.root.title("Geiger Counter Analysis")
 
 root.mainloop()
