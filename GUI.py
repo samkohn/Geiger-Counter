@@ -138,36 +138,6 @@ class App:
         
 
 
-
-#class InputDialog:
-#    def __init__ (self, parent, title, label):
-#        
-#        self.window = tk.Toplevel(parent)
-#        self.window.title(title)
-#        self.parent = parent
-#
-#        self.label = tk.Label(self.window, text=label).pack()
-#
-#        self.spinbox = tk.Spinbox(self.window, from_=0, increment=0.1)
-#        self.spinbox.pack(padx=5)
-#
-#        self.submitButton = tk.Button(self.window, text="OK", command=self.submit)
-#        self.submitButton.pack(pady=5)
-#        self.value = 0
-#
-#    def getInput(self):
-#        self.parent.wait_window(self.window)
-#        return self.value
-#
-#    def submit(self):
-#        try:
-#            self.value = float(self.spinbox.get())
-#            self.window.destroy()
-#        except TypeError:
-#            self.label.configure(bg="red", text="Must be a number!")
-
-
-
 root = tk.Tk()
 
 app = App(root)
