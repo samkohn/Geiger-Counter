@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+''' analyzeData provides data analysis and storage through the DataSet class for the Geiger-Counter lab
+    in Columbia's W3081 Intermediate Physics Laboratory Course'''
 
 import scipy as sp
 import scipy.io.wavfile as wav
@@ -6,12 +8,19 @@ import pickle
 
 # All times must be in seconds
 class DataSet:
-    ''' Basic class that contains counts and time, as well as defining a rebinning function'''
+    ''' The DataSet class contains methods and members for storing count data, as well as calculating useful values
+        for the Geiger-Counter lab.'''
     def __init__ (self, time = [], rate = 96000, fLength = 0):
+        ''' Default constructor:
+            times contains a list of floats of the starting times for each count.
+            maxTimeResolution contains the number of samples per second.
+            fileLength contains the length of the file in seconds.
+            intervals contains the interval between each count (but is empty until getInterval() is called.
+            countRates contains the count rate between each interval, as defined when calling getCountRate(). countRates ie empty until getCountRate() is called.'''
         # Defines lists of floats for times
         self.times = time
         
-        # maxTimeResolution is a float that defines the binWidth (the time between each sampling of the data).
+        # maxTimeResolution is a float that defines the binWidth by denoting the number of samples per second.
         self.maxTimeResolution = rate
         
         # fileLength describes how long the file is in seconds
@@ -23,7 +32,7 @@ class DataSet:
     
     @classmethod
     def readWaveFile(cls, filename):
-        ''' Effectively a overloaded constructor for pulling in data from a wave file. THRESHOLD is the level
+        ''' Effectively a overloaded constructor for reading in data from a wave file. THRESHOLD is the level
             above which a waveform can be considered a count. It range can be from 0 to 32768, constrained
             by output values from the (16 bit signed) wave file.'''
         (rate, data) = wav.read(filename)
@@ -32,8 +41,17 @@ class DataSet:
 
     @classmethod
     def fromWaveData(cls, i, level, aboveThreshold, inTimes, rate, THRESHOLD = 15000):
+        ''' Effectively a overloaded constructor for procesing data from an already open wave file. 
+            THRESHOLD is the level above which a waveform can be considered a count. It range can be from 0 to 32768,
+            constrained by output values from the (16 bit signed) wave file. This method must be called in a loop,
+            as is done in the GUI, to process the entire file.'''
+        
+        # Displays a progress meter in the console.
         if i % rate == 0:
             print "Analyzed " + str(i/rate) + "seconds"
+        
+        # If the level is below the threshold, ignore it. Otherwise, if it is above the threshold, save the start
+        # time of the level.
         if level <= THRESHOLD:
             aboveThreshold = 0
         elif aboveThreshold == 1:
@@ -45,16 +63,21 @@ class DataSet:
     
     @classmethod
     def fromSavedFile(cls, filename = "dataSet.bin"):
+        ''' Effectively a overloaded constructor for importing previously analzyed data. This method imports
+            the DataSet object data from a previously analzyed wave file. This object must have been saved by 
+            the pickle module. If the structure of DataSet changes, then this import will likely fail.'''
         fIn = open(filename, "rb")
+        
         newDataSet = pickle.load(fIn)
         fIn.close()
         return newDataSet
     
     @classmethod
     def getDeadTime(cls, firstSample, secondSample, combinedSample, sampleRate = 1):
-        ''' Calculates the dead time from two sample, along with a combined sample. The first three inputs to this
-            function must be dataSet objects, while the sampleRate must be an a number, in seconds, in the same 
-            form as would be passed getCountRate()'''
+        ''' Effectively a overloaded constructor for calculating the dead time of a Geiger-Counter. This method 
+            calculates the dead time from two different samples, along with a sample with the two sources in the 
+            Geiger-Counter at the same time. The first three inputs to this function must be dataSet objects,
+            while the sampleRate must be an a number, in seconds, in the same form as would be passed getCountRate()'''
         # Dead time is defined as \tau = (n1 + n2 - n12)/(2n1*n2)
         n1 = firstSample.getCountRate(sampleRate)
         n2 = secondSample.getCountRate(sampleRate)
@@ -64,8 +87,8 @@ class DataSet:
         return deadTime
     
     def getCountRate(self, sampleSize = 1):
-        ''' Gets an array with the count rates calculated in each interval 
-            of width sampleSize. The input, sampleSize, is in seconds. It returns the rates in counts / second'''
+        ''' Begins with a list (numpy array) of the beginning times of each count. The input, sampleSize,
+            is in seconds. It returns the rates in counts / second'''
         numBins = int(self.fileLength / sampleSize)
 
         # Ignore all times after the last full bin
@@ -73,6 +96,7 @@ class DataSet:
 
         (rates, binEdges) = sp.histogram(self.times, numBins, (0, maxTime))
         
+        # Returns the count rate in counts / second, rather than counts / bin
         self.countRates = rates/sampleSize
 
         return (self.countRates, binEdges)
@@ -88,11 +112,12 @@ class DataSet:
         return self.intervals
     
     def getTotalCounts(self):
-        ''' Returns the total number of counts in the sample. To compare this number, the length
-            of the recordings must be same '''
+        ''' Returns the total number of counts in the sample. To compare this number to another recording, the length
+            of the recordings must be same (or scaled to account for the different length of recordings). '''
         return len(self.times)
     
     def save(self, filename = "dataSet.bin"):
+        ''' Saves the DataSet object to a file, set by the input. This object is saved using the pickle module.'''
         fOut = open(filename, "wb")
         
         pickle.dump(self, fOut)
@@ -100,8 +125,7 @@ class DataSet:
     
     def rebin(self, newBinWidth):
         ''' Rebins data for some arbitrary multiple of the maxTimeResolution. A new object is returned.
-            This function is generally deprecated, as any arbitrary count rate can now be calculated in
-            getCountRate()'''
+            This function is deprecated, as any arbitrary count rate can now be calculated in getCountRate()'''
         # Determine the factor by which to scale the bins
         rebinningFactor = newBinWidth/self.maxTimeResolution
         
