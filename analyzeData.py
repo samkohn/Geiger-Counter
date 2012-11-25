@@ -22,29 +22,26 @@ class DataSet:
         self.countRates = []
     
     @classmethod
-    def fromWaveFile(cls, filename, THRESHOLD = 15000):
+    def readWaveFile(cls, filename):
         ''' Effectively a overloaded constructor for pulling in data from a wave file. THRESHOLD is the level
             above which a waveform can be considered a count. It range can be from 0 to 32768, constrained
             by output values from the (16 bit signed) wave file.'''
         (rate, data) = wav.read(filename)
 
-        aboveThreshold = 0
-        times = []
-        for i, level in enumerate(data):
-            if i % rate == 0:
-                print "Analyzed " + str(i/rate) + "seconds"
-            if level <= THRESHOLD:
-                aboveThreshold = 0
-            elif aboveThreshold == 1:
-                continue
-            else:
-                aboveThreshold = 1
-                times.append(float(i)/float(rate))
-        
-        fileLength = float(len(data))/float(rate)
-        
-        print "numCounts = " + str(len(times))
-        return cls(times, rate, fileLength)
+        return (rate, data)
+
+    @classmethod
+    def fromWaveData(cls, i, level, aboveThreshold, inTimes, rate, THRESHOLD = 15000):
+        if i % rate == 0:
+            print "Analyzed " + str(i/rate) + "seconds"
+        if level <= THRESHOLD:
+            aboveThreshold = 0
+        elif aboveThreshold == 1:
+            return aboveThreshold
+        else:
+            aboveThreshold = 1
+            inTimes.append(float(i)/float(rate))
+        return aboveThreshold
     
     @classmethod
     def fromSavedFile(cls, filename = "dataSet.bin"):

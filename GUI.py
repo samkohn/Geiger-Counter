@@ -50,7 +50,19 @@ class App:
     def importWavFile(self):
         filename = tkfd.askopenfilename(title="Pick your .wav file", initialdir=".", parent=self.root)
         print filename
-        self.dataSet = ad.DataSet.fromWaveFile(filename)
+        rate, wavData = ad.DataSet.readWaveFile(filename)
+        self.threshold = 15000
+        times = []
+        aboveThreshold = 0
+        for i, level in enumerate(wavData):
+            if i % rate == 0:
+                #self.updateImportStream(i, rate)
+                print "gui reached ", i, "data points"
+            aboveThreshold = ad.DataSet.fromWaveData(i, level, aboveThreshold, times, rate, self.threshold) 
+        fileLength = float(len(wavData))/float(rate)
+        
+        print "numCounts = " + str(len(times))
+        self.dataSet = ad.DataSet(times, rate, fileLength)
         print "imported"
         self.updateFileLabel(filename)
 
