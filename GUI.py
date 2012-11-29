@@ -16,8 +16,6 @@ class App:
 
     def __init__(self, master):
         '''Creates a new App window from scratch'''
-        
-
 
         #save the root TK frame
         self.root = master
@@ -82,7 +80,15 @@ class App:
 
         #grab threshold from user
         labelText = "Enter the threshold for detecting a count"
-        self.threshold = tksd.askinteger("Threshold", labelText, parent=self.root, minvalue=0)
+        threshold = tksd.askinteger("Threshold", labelText, parent=self.root, minvalue=0)
+        if not threshold:
+            return
+
+        #grab samples per count from user
+        labelText = "Enter the samples per count for detecting multiple counts faster than the discriminator will tell you"
+        samplesPerCount = tksd.askinteger("Samples per Count", labelText, parent=self.root, minvalue=0)
+        if not samplesPerCount:
+            return
 
         #list of the time of each count
         times = []
@@ -107,7 +113,7 @@ class App:
                 print "gui reached ", i, "data points"
 
             #check if the current data level is above the threshold
-            aboveThreshold = ad.DataSet.fromWaveData(i, level, aboveThreshold, times, rate, self.threshold) 
+            aboveThreshold = ad.DataSet.fromWaveData(i, level, aboveThreshold, times, rate, samplesPerCount, threshold) 
 
         #when the loop is finished, update the label one last time
         self.progressLabel.configure(text="Import Progress: 100%")
@@ -141,6 +147,8 @@ class App:
             #prompt for desired bin spacing
             labelText = "Enter the desired sample length in seconds"
             binSpacing = tksd.askfloat("Count Rate", labelText, parent=self.root, minvalue=0)
+            if not binSpacing:
+                return
 
             #plot the count rate in matplotlib
             pd.plotCountRate(self.dataSet, binSpacing)
@@ -161,10 +169,14 @@ class App:
             #ask for number of bins for histogram
             labelText = "Enter the number of bins"
             numBins = tksd.askinteger("Count Rate Histogram", labelText, parent=self.root, minvalue=1)
+            if not numBins:
+                return
 
             #ask for length of sample to calculate count rate
             labelText = "Enter the sample length (seconds)"
             sampleLength = tksd.askfloat("Sample Length", labelText, parent=self.root, minvalue=0)
+            if not sampleLength:
+                return
 
             #plot histogram in matplotlib
             pd.plotHistOfCountRates(self.dataSet, sampleLength, numBins)
@@ -182,6 +194,8 @@ class App:
             #ask for the number of bins for the histogram
             labelText = "Enter the desired number of bins in the histogram"
             numBins = tksd.askinteger("Intervals Histogram", labelText, parent=self.root, minvalue=1)
+            if not numBins:
+                return
 
             #plot the histogram in matplotlib
             pd.plotHistOfIntervals(self.dataSet, numBins)
