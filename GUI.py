@@ -84,12 +84,6 @@ class App:
         if not threshold:
             return
 
-        #grab samples per count from user
-        labelText = "Enter the samples per count for detecting multiple counts faster than the discriminator will tell you. If you don't know what this means, read the lab manual!"
-        samplesPerCount = tksd.askinteger("Samples per Count", labelText, parent=self.root, minvalue=0, initialvalue=25)
-        if not samplesPerCount:
-            return
-
         #list of the time of each count
         times = []
 
@@ -113,7 +107,7 @@ class App:
                 print "gui reached ", i, "data points"
 
             #check if the current data level is above the threshold
-            aboveThreshold = ad.DataSet.fromWaveData(i, level, aboveThreshold, times, rate, samplesPerCount, threshold) 
+            aboveThreshold = ad.DataSet.fromWaveData(i, level, aboveThreshold, times, rate, threshold) 
 
         #when the loop is finished, update the label one last time
         self.progressLabel.configure(text="Import Progress: 100%")
