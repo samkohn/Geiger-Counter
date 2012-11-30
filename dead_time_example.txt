@@ -1,0 +1,3 @@
+co: 4654 per 5 min
+both: 20324 per 5 min
+na: 15498 per 5 min
