@@ -2,5 +2,5 @@
 *.swp
 *.pyc
 *.bin
+*.csv
 build
-dist

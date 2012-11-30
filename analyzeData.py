@@ -5,6 +5,7 @@
 import scipy as sp
 import scipy.io.wavfile as wav
 import pickle
+import csv
 
 # All times must be in seconds
 class DataSet:
@@ -78,7 +79,10 @@ class DataSet:
         ''' Effectively a overloaded constructor for calculating the dead time of a Geiger-Counter. This method 
             calculates the dead time from two different samples, along with a sample with the two sources in the 
             Geiger-Counter at the same time. The first three inputs to this function must be dataSet objects,
-            while the sampleRate must be an a number, in seconds, in the same form as would be passed getCountRate()'''
+            while the sampleRate must be an a number, in seconds, in the same form as would be passed getCountRate().
+            This is intentionally not exposed through the GUI. It must be called through the python interpreter, and
+            it will take some work. However, this is supposed to be a student calculation, so it should just be
+            performed by the student, outside of this code.'''
         # Dead time is defined as \tau = (n1 + n2 - n12)/(2n1*n2)
         n1 = firstSample.getCountRate(sampleRate)
         n2 = secondSample.getCountRate(sampleRate)
@@ -123,6 +127,16 @@ class DataSet:
         
         pickle.dump(self, fOut)
         fOut.close()
+    
+    def exportCSV(self, filename = "startTimes.csv"):
+        ''' Exports the beginning time of each count. This would be for ussing the data in other programs.
+            If the data is to be used with this code, then use save(). There is a header in the first line,
+            followed by a count start time on each line. The file ends with a newline.'''
+        fOut = csv.writer(open(filename, "wb"))
+        
+        fOut.writerow(["Beginning time for each count"])
+        for time in self.times:
+            fOut.writerow([time])
     
     def rebin(self, newBinWidth):
         ''' Rebins data for some arbitrary multiple of the maxTimeResolution. A new object is returned.

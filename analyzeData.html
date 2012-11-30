@@ -18,10 +18,11 @@ in&nbsp;Columbia's&nbsp;W3081&nbsp;Intermediate&nbsp;Physics&nbsp;Laboratory&nbs
 <font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="pickle.html">pickle</a><br>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="csv.html">csv</a><br>
+</td><td width="25%" valign=top><a href="pickle.html">pickle</a><br>
 </td><td width="25%" valign=top><a href="scipy.html">scipy</a><br>
 </td><td width="25%" valign=top><a href="scipy.io.wavfile.html">scipy.io.wavfile</a><br>
-</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+</td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -49,6 +50,10 @@ fileLength&nbsp;contains&nbsp;the&nbsp;length&nbsp;of&nbsp;the&nbsp;file&nbsp;in
 intervals&nbsp;contains&nbsp;the&nbsp;interval&nbsp;between&nbsp;each&nbsp;count&nbsp;(but&nbsp;is&nbsp;empty&nbsp;until&nbsp;<a href="#DataSet-getInterval">getInterval</a>()&nbsp;is&nbsp;called.<br>
 countRates&nbsp;contains&nbsp;the&nbsp;count&nbsp;rate&nbsp;between&nbsp;each&nbsp;interval,&nbsp;as&nbsp;defined&nbsp;when&nbsp;calling&nbsp;<a href="#DataSet-getCountRate">getCountRate</a>().&nbsp;countRates&nbsp;ie&nbsp;empty&nbsp;until&nbsp;<a href="#DataSet-getCountRate">getCountRate</a>()&nbsp;is&nbsp;called.</tt></dd></dl>
 
+<dl><dt><a name="DataSet-exportCSV"><strong>exportCSV</strong></a>(self, filename<font color="#909090">='startTimes.csv'</font>)</dt><dd><tt>Exports&nbsp;the&nbsp;beginning&nbsp;time&nbsp;of&nbsp;each&nbsp;count.&nbsp;This&nbsp;would&nbsp;be&nbsp;for&nbsp;ussing&nbsp;the&nbsp;data&nbsp;in&nbsp;other&nbsp;programs.<br>
+If&nbsp;the&nbsp;data&nbsp;is&nbsp;to&nbsp;be&nbsp;used&nbsp;with&nbsp;this&nbsp;code,&nbsp;then&nbsp;use&nbsp;<a href="#DataSet-save">save</a>().&nbsp;There&nbsp;is&nbsp;a&nbsp;header&nbsp;in&nbsp;the&nbsp;first&nbsp;line,<br>
+followed&nbsp;by&nbsp;a&nbsp;count&nbsp;start&nbsp;time&nbsp;on&nbsp;each&nbsp;line.&nbsp;The&nbsp;file&nbsp;ends&nbsp;with&nbsp;a&nbsp;newline.</tt></dd></dl>
+
 <dl><dt><a name="DataSet-getCountRate"><strong>getCountRate</strong></a>(self, sampleSize<font color="#909090">=1</font>)</dt><dd><tt>Begins&nbsp;with&nbsp;a&nbsp;list&nbsp;(numpy&nbsp;array)&nbsp;of&nbsp;the&nbsp;beginning&nbsp;times&nbsp;of&nbsp;each&nbsp;count.&nbsp;The&nbsp;input,&nbsp;sampleSize,<br>
 is&nbsp;in&nbsp;seconds.&nbsp;It&nbsp;returns&nbsp;the&nbsp;rates&nbsp;in&nbsp;counts&nbsp;/&nbsp;second</tt></dd></dl>
 
@@ -69,14 +74,17 @@ the&nbsp;<a href="#DataSet">DataSet</a>&nbsp;object&nbsp;data&nbsp;from&nbsp;a&n
 the&nbsp;pickle&nbsp;module.&nbsp;If&nbsp;the&nbsp;structure&nbsp;of&nbsp;<a href="#DataSet">DataSet</a>&nbsp;changes,&nbsp;then&nbsp;this&nbsp;import&nbsp;will&nbsp;likely&nbsp;fail.</tt></dd></dl>
 
 <dl><dt><a name="DataSet-fromWaveData"><strong>fromWaveData</strong></a>(cls, i, level, aboveThreshold, inTimes, rate, THRESHOLD<font color="#909090">=15000</font>)<font color="#909090"><font face="helvetica, arial"> from __builtin__.classobj</font></font></dt><dd><tt>Effectively&nbsp;a&nbsp;overloaded&nbsp;constructor&nbsp;for&nbsp;procesing&nbsp;data&nbsp;from&nbsp;an&nbsp;already&nbsp;open&nbsp;wave&nbsp;file.&nbsp;<br>
-THRESHOLD&nbsp;is&nbsp;the&nbsp;level&nbsp;above&nbsp;which&nbsp;a&nbsp;waveform&nbsp;can&nbsp;be&nbsp;considered&nbsp;a&nbsp;count.&nbsp;It&nbsp;range&nbsp;can&nbsp;be&nbsp;from&nbsp;0&nbsp;to&nbsp;32768,<br>
+THRESHOLD&nbsp;is&nbsp;the&nbsp;level&nbsp;above&nbsp;which&nbsp;a&nbsp;waveform&nbsp;can&nbsp;be&nbsp;considered&nbsp;a&nbsp;count.&nbsp;It&nbsp;range&nbsp;can&nbsp;be&nbsp;from&nbsp;0&nbsp;to&nbsp;32767,<br>
 constrained&nbsp;by&nbsp;output&nbsp;values&nbsp;from&nbsp;the&nbsp;(16&nbsp;bit&nbsp;signed)&nbsp;wave&nbsp;file.&nbsp;This&nbsp;method&nbsp;must&nbsp;be&nbsp;called&nbsp;in&nbsp;a&nbsp;loop,<br>
 as&nbsp;is&nbsp;done&nbsp;in&nbsp;the&nbsp;GUI,&nbsp;to&nbsp;process&nbsp;the&nbsp;entire&nbsp;file.</tt></dd></dl>
 
 <dl><dt><a name="DataSet-getDeadTime"><strong>getDeadTime</strong></a>(cls, firstSample, secondSample, combinedSample, sampleRate<font color="#909090">=1</font>)<font color="#909090"><font face="helvetica, arial"> from __builtin__.classobj</font></font></dt><dd><tt>Effectively&nbsp;a&nbsp;overloaded&nbsp;constructor&nbsp;for&nbsp;calculating&nbsp;the&nbsp;dead&nbsp;time&nbsp;of&nbsp;a&nbsp;Geiger-Counter.&nbsp;This&nbsp;method&nbsp;<br>
 calculates&nbsp;the&nbsp;dead&nbsp;time&nbsp;from&nbsp;two&nbsp;different&nbsp;samples,&nbsp;along&nbsp;with&nbsp;a&nbsp;sample&nbsp;with&nbsp;the&nbsp;two&nbsp;sources&nbsp;in&nbsp;the&nbsp;<br>
 Geiger-Counter&nbsp;at&nbsp;the&nbsp;same&nbsp;time.&nbsp;The&nbsp;first&nbsp;three&nbsp;inputs&nbsp;to&nbsp;this&nbsp;function&nbsp;must&nbsp;be&nbsp;dataSet&nbsp;objects,<br>
-while&nbsp;the&nbsp;sampleRate&nbsp;must&nbsp;be&nbsp;an&nbsp;a&nbsp;number,&nbsp;in&nbsp;seconds,&nbsp;in&nbsp;the&nbsp;same&nbsp;form&nbsp;as&nbsp;would&nbsp;be&nbsp;passed&nbsp;<a href="#DataSet-getCountRate">getCountRate</a>()</tt></dd></dl>
+while&nbsp;the&nbsp;sampleRate&nbsp;must&nbsp;be&nbsp;an&nbsp;a&nbsp;number,&nbsp;in&nbsp;seconds,&nbsp;in&nbsp;the&nbsp;same&nbsp;form&nbsp;as&nbsp;would&nbsp;be&nbsp;passed&nbsp;<a href="#DataSet-getCountRate">getCountRate</a>().<br>
+This&nbsp;is&nbsp;intentionally&nbsp;not&nbsp;exposed&nbsp;through&nbsp;the&nbsp;GUI.&nbsp;It&nbsp;must&nbsp;be&nbsp;called&nbsp;through&nbsp;the&nbsp;python&nbsp;interpreter,&nbsp;and<br>
+it&nbsp;will&nbsp;take&nbsp;some&nbsp;work.&nbsp;However,&nbsp;this&nbsp;is&nbsp;supposed&nbsp;to&nbsp;be&nbsp;a&nbsp;student&nbsp;calculation,&nbsp;so&nbsp;it&nbsp;should&nbsp;just&nbsp;be<br>
+performed&nbsp;by&nbsp;the&nbsp;student,&nbsp;outside&nbsp;of&nbsp;this&nbsp;code.</tt></dd></dl>
 
 <dl><dt><a name="DataSet-readWaveFile"><strong>readWaveFile</strong></a>(cls, filename)<font color="#909090"><font face="helvetica, arial"> from __builtin__.classobj</font></font></dt><dd><tt>Effectively&nbsp;a&nbsp;overloaded&nbsp;constructor&nbsp;for&nbsp;reading&nbsp;in&nbsp;data&nbsp;from&nbsp;a&nbsp;wave&nbsp;file.&nbsp;THRESHOLD&nbsp;is&nbsp;the&nbsp;level<br>
 above&nbsp;which&nbsp;a&nbsp;waveform&nbsp;can&nbsp;be&nbsp;considered&nbsp;a&nbsp;count.&nbsp;It&nbsp;range&nbsp;can&nbsp;be&nbsp;from&nbsp;0&nbsp;to&nbsp;32768,&nbsp;constrained<br>
