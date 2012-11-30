@@ -53,6 +53,7 @@ class App:
             ("Import .wav File", self.importWavFile),
             ("Import Saved Data", self.openBinary),
             ("Save Data to Disk", self.saveBinary),
+            ("Export Data in Plaintext", self.export),
             ("Plot Count Rate vs. Time", self.getCountRate),
             ("Plot Count Rate Histogram", self.getCountRateHist),
             ("Plot Intervals Histogram", self.getIntervals),
@@ -66,6 +67,7 @@ class App:
             b.pack(anchor=tk.S)
 
 
+    # to do: update labels
     def importWavFile(self):
         '''Get the data from a .wav file. Prompts the user with a file dialog.
         Prompts the user for a threshold value.  This is the value of the .wav 
@@ -142,7 +144,7 @@ class App:
 
             #prompt for desired bin spacing
             labelText = "Enter the desired sample length in seconds"
-            binSpacing = tksd.askfloat("Count Rate", labelText, parent=self.root, minvalue=0)
+            binSpacing = tksd.askfloat("Count Rate", labelText, parent=self.root, minvalue=0, initialvalue=1)
             if not binSpacing:
                 return
 
@@ -233,6 +235,24 @@ class App:
                 return
             self.dataSet.save(filename)
             print "saved"
+
+        else:
+            #say that you need to import data first
+            self.showImportAlert()
+
+
+    def export(self):
+        '''Exports the count times to a return-separated text file with a one-line header'''
+
+        #check if data has been imported. if not, give a warning
+        if self.dataSet:
+            
+            #prompt for the save location
+            filename = tkfd.asksaveasfilename(initialdir=".", title="Export")
+            if not filename:
+                return
+            self.dataSet.exportCSV(filename)
+            print "exported"
 
         else:
             #say that you need to import data first
