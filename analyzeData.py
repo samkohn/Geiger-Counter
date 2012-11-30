@@ -54,37 +54,50 @@ class DataSet:
         # Displays a progress meter in the console.
         if i % rate == 0:
             print "Analyzed " + str(i/rate) + "seconds"
-        
-        # If the level is below THRESHOLD, then there is not count. If it is transitioning from being a count,
-        # we must check to see if the end of the count was long enough to be a full count. If not, remove it.
-        # This should only be relevant in the event of two overlapping waveforms.
-        # NOTE: This means there is a dead time in the algorithm of 31.25 microseconds. This can be adjusted above.
+
+
+        # If the level is below the threshold, ignore it. Otherwise, if it is above the threshold, save the start
+        # time of the level.
         if level <= THRESHOLD:
-            if aboveThresholdCount != 0:
-                if aboveThresholdCount <= minOverlapCycles:
-                    inTimes.pop(len(inTimes))
             aboveThresholdCount = 0
-        
-        # If the level is above THRESHOLD for the first time, then it is a new count. Record the beginning time
-        # and increment aboveThresholdCount counter.
-        elif aboveThresholdCount == 0:
+        elif aboveThresholdCount == 1:
+            return aboveThresholdCount
+        else:
             aboveThresholdCount = 1
             inTimes.append(float(i)/float(rate))
-        
-        # This is in the middle of a count. The previous level was above THRESHOLD, and this level was as well.
-        # samplesPerCount defines a count length. We are only part of the way through the count.
-        # Increment aboveThresholdCount and continue.
-        elif aboveThresholdCount < samplesPerCount:
-            aboveThresholdCount += 1
-        
-        # A full count has occurred, based on the count length defined by samplesPerCount. However, the level is
-        # still above THRESHOLD, so it probably is to be two overlapping counts. If waveform is only one count, 
-        # and is slightly longer than defined in samplesPerCount, then it will be removed by the first if statement.
-        # If it really is two overlapping counts, this will record the start time and reset the aboveThresholdCount
-        # counter.
-        elif aboveThresholdCount == samplesPerCount:
-            aboveThresholdCount = 1
-            inTimes.append(float(i)/float(rate))
+
+
+
+        ## If the level is below THRESHOLD, then there is not count. If it is transitioning from being a count,
+        ## we must check to see if the end of the count was long enough to be a full count. If not, remove it.
+        ## This should only be relevant in the event of two overlapping waveforms.
+        ## NOTE: This means there is a dead time in the algorithm of 31.25 microseconds. This can be adjusted above.
+        #if level <= THRESHOLD:
+        #    if aboveThresholdCount != 0:
+        #        if aboveThresholdCount <= minOverlapCycles:
+        #            inTimes.pop(len(inTimes))
+        #    aboveThresholdCount = 0
+        #
+        ## If the level is above THRESHOLD for the first time, then it is a new count. Record the beginning time
+        ## and increment aboveThresholdCount counter.
+        #elif aboveThresholdCount == 0:
+        #    aboveThresholdCount = 1
+        #    inTimes.append(float(i)/float(rate))
+        #
+        ## This is in the middle of a count. The previous level was above THRESHOLD, and this level was as well.
+        ## samplesPerCount defines a count length. We are only part of the way through the count.
+        ## Increment aboveThresholdCount and continue.
+        #elif aboveThresholdCount < samplesPerCount:
+        #    aboveThresholdCount += 1
+        #
+        ## A full count has occurred, based on the count length defined by samplesPerCount. However, the level is
+        ## still above THRESHOLD, so it probably is to be two overlapping counts. If waveform is only one count, 
+        ## and is slightly longer than defined in samplesPerCount, then it will be removed by the first if statement.
+        ## If it really is two overlapping counts, this will record the start time and reset the aboveThresholdCount
+        ## counter.
+        #elif aboveThresholdCount == samplesPerCount:
+        #    aboveThresholdCount = 1
+        #    inTimes.append(float(i)/float(rate))
         
         return aboveThresholdCount
     
