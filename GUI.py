@@ -79,14 +79,14 @@ class App:
         rate, wavData = ad.DataSet.readWaveFile(filename)
 
         #grab threshold from user
-        labelText = "Enter the threshold for detecting a count"
-        threshold = tksd.askinteger("Threshold", labelText, parent=self.root, minvalue=0)
+        labelText = "Enter the threshold for detecting a count. If you don't know what this means, read the lab manual!"
+        threshold = tksd.askinteger("Threshold", labelText, parent=self.root, minvalue=0, initialvalue=15000)
         if not threshold:
             return
 
         #grab samples per count from user
-        labelText = "Enter the samples per count for detecting multiple counts faster than the discriminator will tell you"
-        samplesPerCount = tksd.askinteger("Samples per Count", labelText, parent=self.root, minvalue=0)
+        labelText = "Enter the samples per count for detecting multiple counts faster than the discriminator will tell you. If you don't know what this means, read the lab manual!"
+        samplesPerCount = tksd.askinteger("Samples per Count", labelText, parent=self.root, minvalue=0, initialvalue=25)
         if not samplesPerCount:
             return
 
