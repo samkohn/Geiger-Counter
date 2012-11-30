@@ -73,6 +73,8 @@ class App:
 
         #prompt for file name
         filename = tkfd.askopenfilename(title="Pick your .wav file", initialdir=".", parent=self.root)
+        if not filename:
+            return
         print filename
 
         #grab the data rate (points per second) and a list of data
@@ -227,6 +229,8 @@ class App:
             
             #prompt for the save location
             filename = tkfd.asksaveasfilename(initialdir=".", title="Save Data")
+            if not filename:
+                return
             self.dataSet.save(filename)
             print "saved"
 
@@ -242,6 +246,8 @@ class App:
 
         #prompt for file name
         filename = tkfd.askopenfilename(initialdir=".", title="Open File")
+        if not filename:
+            return
 
         #import the file and record the DataSet
         self.dataSet = ad.DataSet.fromSavedFile(filename)
