@@ -1,5 +1,7 @@
-'''
-    Creates a windows executable with cx_freeze
+''' Creates a windows executable with cx_freeze. Run with "python cx_setup build". The package is fairly massive
+    right now (~80 MB), partially because it includes extra libraries that are unnecessary, like QT, but one
+    must be very careful when removing libraries, as it can cause the whole package to fail. Consequently,
+    they are simply left in.
 '''
 
 import sys
