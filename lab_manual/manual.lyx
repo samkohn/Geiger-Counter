@@ -553,7 +553,7 @@ With an appropriate understanding of the GM tube operation, we can use it
 
 , measuring the disintegration rate of the irradiated sample for longer
  than 
-\begin_inset Formula $\unit[5]{min}$
+\begin_inset Formula $\unit[3]{min}$
 \end_inset
 
  will not give more information about the short lifetime.
@@ -581,7 +581,7 @@ If time remains, try the following measurement on silver.
 \begin_inset Formula $50\%\ ^{110}\textnormal{Ag}$
 \end_inset
 
- is irradiated with slow neutrons, its 
+) is irradiated with slow neutrons, its 
 \begin_inset Formula $109$
 \end_inset
 
