@@ -8,3 +8,5 @@ py2app/*
 *.lyx#
 *.lyx~
 lab_manual/manual.lyx~
+
+lab_manual/#manual.lyx#
