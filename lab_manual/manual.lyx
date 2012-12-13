@@ -113,11 +113,7 @@ Geiger Counters
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
-
-\begin_layout Plain Layout
-
-\end_layout
+status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -130,7 +126,9 @@ status collapsed
 \begin_inset Caption
 
 \begin_layout Plain Layout
-The cascade of ionizing electrons
+The cascade of ionizing electrons.
+ Source: http://commons.wikimedia.org/wiki/File:Spread_of_avalanches_in_G-M_tube.jp
+g
 \end_layout
 
 \end_inset
