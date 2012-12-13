@@ -2,7 +2,7 @@
 \lyxformat 413
 \begin_document
 \begin_header
-\textclass article
+\textclass revtex4
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -25,7 +25,19 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
-\use_hyperref false
+\spacing single
+\use_hyperref true
+\pdf_title "Geiger Counter Lab Analysis Software Instruction Manual"
+\pdf_author "Raymond Ehlers and Sam Kohn"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
 \papersize default
 \use_geometry false
 \use_amsmath 1
@@ -59,8 +71,264 @@
 
 \begin_body
 
-\begin_layout Standard
+\begin_layout Title
+Geiger Counter Lab Analysis Software
+\end_layout
 
+\begin_layout Author
+Raymond Ehlers
+\end_layout
+
+\begin_layout Author
+Sam Kohn
+\end_layout
+
+\begin_layout Author
+Abstract here...
+\end_layout
+
+\begin_layout Section
+Recording Data
+\end_layout
+
+\begin_layout Standard
+Based on the current experimental setup, data can be recorded through a
+ simple 
+\begin_inset Formula $3.5$
+\end_inset
+
+ mm audio jack.
+ Be certain to plug in the USB connector from the voltage controller in
+ addition to the 
+\begin_inset Formula $3.5$
+\end_inset
+
+ mm plug into the microphone port of the computer.
+ This may already be completed.
+ See the lab manual for specific instructions on setup of the experiment.
+\end_layout
+
+\begin_layout Subsection
+Audacity
+\end_layout
+
+\begin_layout Standard
+Audacity (
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://audacity.sourceforge.net/
+\end_layout
+
+\end_inset
+
+) is a free, open source, cross platform tool for audio recording and editing.
+ While in principle any any audio recording software would be sufficient,
+ Audacity has a strong set of features, as well as good flexibility and
+ usability, such that it good choice for this lab.
+ To record in Audacity, it is as simple as pressing the large, red record
+ button near the middle of the upper interface, which can be seen in figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:The-Audacity-upper-interface"
+
+\end_inset
+
+.
+ However, this general begins recording the microphone, which is not particularl
+y useful for this experiment.
+ A number of options, which will be described below, must be setup to record
+ the data correctly.
+\end_layout
+
+\begin_layout Subsection
+Recording Data Using Audacity
+\end_layout
+
+\begin_layout Standard
+To process the recorded data correctly, the sampling characteristics must
+ be set.
+ To specify these settings, open the Audacity sampling preferences under
+ 
+\begin_inset Formula $\mathtt{Edit->Preferences->Quality}$
+\end_inset
+
+ (or 
+\begin_inset Formula $\mathtt{Audacity->Preferences->Quality}$
+\end_inset
+
+ on Mac OS X), and set the Default Sample Rate(recommended in the lab manual)
+ and Default Sample Format (this must be 
+\begin_inset Formula $16$
+\end_inset
+
+-bit).
+ 
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/audacity.interface.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The Audacity upper interface
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:The-Audacity-upper-interface"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Before beginning to take data, the correct audio input must be established.
+ This is set in the two drop-down menus to the right of the microphone icon.
+ The drop-down menu is located in the lower toolbar of the upper part of
+ the Audacity, and can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:The-Audacity-upper-interface"
+
+\end_inset
+
+.
+ The first drop-down menu, with the value of 
+\begin_inset Quotes eld
+\end_inset
+
+Integrated Microphone Array
+\begin_inset Quotes erd
+\end_inset
+
+ in the figure, determines the source of the audio.
+ Finding the appropriate source is described in the lab manual.
+ The drop-down menu to the farthest right must be set to 
+\begin_inset Formula $1$
+\end_inset
+
+ (Mono) Input Channel.
+ The voltage controller only outputs mono pulses, and an added signal may
+ cause problems in the analysis software, so it is critical to ensure that
+ Mono is selected.
+\end_layout
+
+\begin_layout Subsubsection
+Timing the recording
+\end_layout
+
+\begin_layout Standard
+While recording can be completed manual in Audacity, for this lab, it is
+ convenient to set Audacity to record for a specified length of time.
+ This will allow the student to avoid a need to cut down the audio file
+ after recording.
+ This feature is accessible under 
+\begin_inset Formula $\mathtt{Transport->Timer\: Record...}$
+\end_inset
+
+ See the lab manual to determine the appropriate duration to record for
+ different samples.
+ Clicking 
+\begin_inset Quotes eld
+\end_inset
+
+OK
+\begin_inset Quotes erd
+\end_inset
+
+ will begin the recording.
+\end_layout
+
+\begin_layout Subsubsection
+Exporting the Audio Data
+\end_layout
+
+\begin_layout Standard
+After the data has been collected, it can be saved in an Audacity file,
+ but this will not be useful for analysis.
+ Instead, the data must be exported as a 
+\begin_inset Formula $16$
+\end_inset
+
+-bit signed wave file.
+ To export the data, select 
+\begin_inset Formula $\mathtt{File->Export}$
+\end_inset
+
+.
+ In the dialog box, be certain to change the 
+\begin_inset Quotes eld
+\end_inset
+
+Save as type
+\begin_inset Quotes erd
+\end_inset
+
+ drop-down menu to 
+\begin_inset Quotes eld
+\end_inset
+
+WAV (Microsoft) signed 16 bit PCM.
+\begin_inset Quotes erd
+\end_inset
+
+ After this has been selected, choose the location and file name for your
+ data, and save it.
+ The data file is now ready to be analyzed.
+\end_layout
+
+\begin_layout Subsubsection
+The Waveform in Audacity
+\end_layout
+
+\begin_layout Section
+Analysis Software
+\end_layout
+
+\begin_layout Standard
+Usage of the software will first be described, followed by a more technical
+ discussion of the code involved.
+\end_layout
+
+\begin_layout Subsection
+Analysis Functionality
+\end_layout
+
+\begin_layout Subsubsection
+Importing Data
+\end_layout
+
+\begin_layout Subsection
+File Output and Formats
+\end_layout
+
+\begin_layout Subsection
+Further Documentation
 \end_layout
 
 \end_body
