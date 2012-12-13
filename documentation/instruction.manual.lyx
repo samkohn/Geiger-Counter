@@ -517,10 +517,6 @@ First, software usage will be discussed, followed by a more technical discussion
 Analysis Functionality
 \end_layout
 
-\begin_layout Standard
-
-\end_layout
-
 \begin_layout Subsubsection
 Importing Data
 \end_layout
@@ -531,6 +527,10 @@ File Output and Formats
 
 \begin_layout Subsection
 Further Documentation
+\end_layout
+
+\begin_layout Subsubsection
+Building Executables
 \end_layout
 
 \end_body
