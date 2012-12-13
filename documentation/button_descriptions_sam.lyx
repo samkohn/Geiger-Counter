@@ -64,8 +64,8 @@ Get Total Counts:
 \end_layout
 
 \begin_layout Standard
-Clicking on this button opens a window displaying the total number of counts
- in the current sample.
+This button opens a window displaying the total number of counts in the
+ current data set.
 \end_layout
 
 \begin_layout Standard
@@ -74,7 +74,7 @@ Plot Intervals Histogram:
 
 \begin_layout Standard
 This button plots a histogram of the time interval between consecutive counts
- in the current sample--so if there are 
+ in the current data set--so if there are 
 \begin_inset Formula $N$
 \end_inset
 
@@ -83,7 +83,76 @@ This button plots a histogram of the time interval between consecutive counts
 \end_inset
 
  elements in the histogram.
- The only required input is the number of bins in the histogram.
+ The only input is the number of bins in the histogram.
+\end_layout
+
+\begin_layout Standard
+Plot Count Rate Histogram:
+\end_layout
+
+\begin_layout Standard
+This button plots a histogram of the count rates of the current data set.
+ The two inputs are sample size and number of bins in the histogram.
+ The sample size represents the duration over which the count rate is calculated
+ for each element of the histogram.
+ For example, for a 
+\begin_inset Formula $\unit[100]{s}$
+\end_inset
+
+ data set and 
+\begin_inset Formula $\unit[1]{s}$
+\end_inset
+
+ sample size, the histogram will contain 
+\begin_inset Formula $100$
+\end_inset
+
+ elements, each containing the average count rate over a particular 
+\begin_inset Formula $\unit[1]{s}$
+\end_inset
+
+ segment of the data set.
+\end_layout
+
+\begin_layout Standard
+Plot Count Rate vs Time:
+\end_layout
+
+\begin_layout Standard
+This button plots a graph of the count rate as a function of time for the
+ current data set.
+ The only input is the sample size, which represents the duration over which
+ the count rate is calculated for each point on the graph.
+ For example, for a 
+\begin_inset Formula $\unit[100]{s}$
+\end_inset
+
+ data set and 
+\begin_inset Formula $\unit[1]{s}$
+\end_inset
+
+ sample size, the graph will have 
+\begin_inset Formula $100$
+\end_inset
+
+ points, each identifying the average count rate over the 
+\begin_inset Formula $\unit[1]{s}$
+\end_inset
+
+ duration beginning at that point.
+\end_layout
+
+\begin_layout Standard
+Export Data in Plaintext:
+\end_layout
+
+\begin_layout Standard
+This button exports the current data set into a CSV (comma-separated values)
+ file for use with other data analysis software.
+ The format is one line of header, followed by each count time on its own
+ line.
+ The only input is the save location, accessible through the file chooser
+ dialog window.
 \end_layout
 
 \end_body
