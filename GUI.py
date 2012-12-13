@@ -50,6 +50,7 @@ class App:
 
         #list of buttons and associated actions to execute on click
         buttons = [
+            ("Calibrate .wav Importer", self.showThresholdGraph),
             ("Import .wav File", self.importWavFile),
             ("Import Saved Data", self.openBinary),
             ("Save Data to Disk", self.saveBinary),
@@ -298,6 +299,11 @@ class App:
             #escape backslashes! \ => \\
             path = filename.split("\\")
             self.fileName.configure(text=path[1] + "\\...\\" + path[len(path)-1])
+
+    def showThresholdGraph(self):
+        '''Shows a graph of the .wav amplitudes so that the user can figure out a good threshold'''
+        pass
+
         
 
 
