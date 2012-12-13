@@ -1,10 +1,5 @@
-To do:
+To Do:
 
-main.py:
-plot count rate per time
-plot count rate in bins of width t
-plot histogram of count rates over many samples
-
-
-analyzeData.py:
-methods that return list of time intervals and the corresponding counts
+actually implement threshold sampling
+combine two data sets (append DataSets or something like that)
+export histograms as csv
