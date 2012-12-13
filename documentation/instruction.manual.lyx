@@ -97,6 +97,19 @@ sjk2163@columbia.edu
 Columbia University, Columbia College, Class of 2013
 \end_layout
 
+\begin_layout Abstract
+The Geiger Counter analysis Software, written in Python, provides complete
+ analysis from saved wave file to histograms of relevant quantities.
+ This manual describes usage of Audacity for audio recording, as well as
+ the usage of the Geiger Counter analysis software.
+ In addition, this manual documents the code used in the software itself,
+ allowing for potential future modification.
+ This software was written for the E.
+ K.
+ A.
+ Advanced Physics Lab at Columbia University.
+\end_layout
+
 \begin_layout Section
 Recording Data
 \end_layout
@@ -258,7 +271,7 @@ While recording can be completed manual in Audacity, for this lab, it is
  This will allow the student to avoid a need to cut down the audio file
  after recording.
  This feature is accessible under 
-\begin_inset Formula $\mathtt{Transport->Timer\: Record...}$
+\begin_inset Formula $\mathtt{Transport->Timer\ Record...}$
 \end_inset
 
  See the lab manual to determine the appropriate duration to record for
@@ -507,6 +520,7 @@ Analysis Software
 First, software usage will be discussed, followed by a more technical discussion
  of the code.
  This analysis code was written by Raymond Ehlers and Sam Kohn, CC 2013.
+ If major issues are encountered, feel free to contract either of us.
 \end_layout
 
 \begin_layout Subsection
@@ -682,6 +696,13 @@ If analysis has already been completed and the data set was saved, the data
 
 \begin_layout Subsubsection
 Save Data to Disk
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Save-Data-to-Disk"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -719,6 +740,8 @@ This button exports the current data set into a CSV (comma-separated values)
  line.
  The only input is the save location, accessible through the file chooser
  dialog window.
+ Data cannot be re-imported into the analysis software based on this file
+ format.
 \end_layout
 
 \begin_layout Subsubsection
@@ -842,8 +865,23 @@ I needed a new line, so this seemed like the best way to do it.
 \end_layout
 
 \begin_layout Standard
-The analysis software is dependent on a number of built in python modules,
- such as Tkinter, CSV and Pickle.
+The analysis software can be found on Github at 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://www.github.com/
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The analysis software is written in python, and is dependent on a number
+ of built in python modules, such as Tkinter, CSV and Pickle.
  In addition, the software depends on the third party Matplotlib and Scipy
  modules.
  For Windows, the easiest way to install these modules is with a third party
@@ -864,11 +902,11 @@ http://code.google.com/p/pythonxy/
 
 ).
  For Mac or Linux, it is best to utilize pip, utilizing the commands 
-\begin_inset Formula $\mathtt{pip\: install\; matplotlib}$
+\begin_inset Formula $\mathtt{pip\ install\ matplotlib}$
 \end_inset
 
  and 
-\begin_inset Formula $\mathtt{pip\: install\: scipy}$
+\begin_inset Formula $\mathtt{pip\ install\ scipy}$
 \end_inset
 
 .
@@ -903,8 +941,9 @@ The code structure centers around two files,
 \end_inset
 
 .
- analyzeData is a python module that implements the back-end calculations
- initiated from the GUI front-end.
+ GUI is the front end, which utilizes the analyzeData python module.
+ The analyzeData module implements the back-end functionality through an
+ object called DataSet.
  The methods and members of the both files can be seen in 
 \begin_inset Formula $\mathtt{./documentation/GUI.html}$
 \end_inset
@@ -920,24 +959,151 @@ The code structure centers around two files,
 \end_layout
 
 \begin_layout Subsubsection
-Alternative Ways to Run the Analysis
-\end_layout
-
-\begin_layout Standard
-While most systems should be setup 
-\end_layout
-
-\begin_layout Subsubsection
 File Output and Formats
 \end_layout
 
 \begin_layout Standard
 As alluded to above there are a few different ways to export data from the
  analysis software.
+ The Save Data to Disk function, described in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Save-Data-to-Disk"
+
+\end_inset
+
+, saves the object using the Python Pickle module.
+ The Pickle module creates a pseudo-binary file, which can be read in plain
+ text, but is not a format conducive to parsing.
+ Further, if the members of the DataSet object are changed, it cannot be
+ guaranteed that Pickle will correctly re-expand the DataSet object to a
+ functional state.
+ In principle, it should be fine unless DataSet is changed to depend on
+ a variable existing that had no previous, while also not accounting for
+ this during the importing process.
+ In summary, it can be edited, but it must be done carefully.
+ Despite these potential difficulties, Pickle is preferred method, as it
+ greatly simplifies the I/O process.
+\end_layout
+
+\begin_layout Standard
+If one desires to do analysis on the counts without such overhead, they
+ can be exported into a CSV, return separated file using the Export Data
+ in Plaintext function described in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Export-Data-in-Plaintext"
+
+\end_inset
+
+.
+ The file format is described in that section.
+ As noted, it cannot be re-imported.
+ It should be fairly trivial to implement the import process for the count
+ times, but one may be left without necessary values for a full DataSet
+ object.
+ It is much simpler to use Save Data to Disk instead.
 \end_layout
 
 \begin_layout Subsubsection
-Building Executable
+Building Executables
+\end_layout
+
+\begin_layout Standard
+There is currently code to build executables in Windows and Mac OS X.
+ Building packages in Windows in fairly fragile and complicated.
+ The Windows build utilizes 
+\begin_inset Formula $\mathtt{cx\_freeze}$
+\end_inset
+
+, and should work fine for any Python 
+\begin_inset Formula $2.7$
+\end_inset
+
+ system, although it cannot be guaranteed.
+ 
+\begin_inset Formula $\mathtt{Python(x,y)}$
+\end_inset
+
+ includes Python 
+\begin_inset Formula $2.7$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathtt{cx\_freeze}$
+\end_inset
+
+ as part of the default distribution.
+ The package is built with 
+\begin_inset Formula $\mathtt{python\ cx\_setup.py\ build}$
+\end_inset
+
+ .
+ Options can be changed in 
+\begin_inset Formula $\mathtt{cx\_setup.py}$
+\end_inset
+
+ if desired.
+ If everything is built correctly, the executable should be under 
+\begin_inset Formula $\mathtt{./build/exe.win32-2.7/GUI.exe}$
+\end_inset
+
+ .
+ The 
+\begin_inset Formula $\mathtt{GC\ Analysis}$
+\end_inset
+
+ shortcut should continue to work, assuming a 
+\begin_inset Formula $32$
+\end_inset
+
+-bit install of Python 
+\begin_inset Formula $2.7$
+\end_inset
+
+ (which can be installed on a 
+\begin_inset Formula $64$
+\end_inset
+
+-bit system).
+\end_layout
+
+\begin_layout Standard
+The Mac package is built with 
+\begin_inset Formula $\mathtt{py2app}$
+\end_inset
+
+, which may be installed with pip.
+ The package can be generated with by starting in the 
+\begin_inset Formula $\mathtt{./py2app/}$
+\end_inset
+
+ folder, running 
+\begin_inset Formula $\mathtt{py2applet}\ {\textstyle --}\mathtt{make}\text{-}\mathtt{setup\ GUI.py}$
+\end_inset
+
+, followed by 
+\begin_inset Formula $\mathtt{python\ setup.py\ py2app}$
+\end_inset
+
+ .
+ The documentation can be found at 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://svn.pythonmac.org/py2app/py2app/trunk/doc/index.html#tutorial
+\end_layout
+
+\end_inset
+
+.
+ The application can be found in 
+\begin_inset Formula $\mathtt{./dist/}$
+\end_inset
+
+ .
 \end_layout
 
 \end_body
