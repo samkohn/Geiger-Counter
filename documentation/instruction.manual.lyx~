@@ -515,6 +515,13 @@ First, software usage will be discussed, followed by a more technical discussion
 
 \begin_layout Subsection
 Analysis Functionality
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Analysis-Functionality"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -569,59 +576,372 @@ reference "fig:The-Geiger-Counter"
 \end_inset
 
 .
+ It can be started by double clicking on the shortcut 
+\begin_inset Formula $\mathtt{GC}\: Analysis$
+\end_inset
+
+ in the main directory in Windows (if that does not work, double click on
+ 
+\begin_inset Formula $\mathtt{GUI.py}$
+\end_inset
+
+.
+ For more information, see section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Further-Documentation"
+
+\end_inset
+
+, including running in a python interpreter, or on a Mac or Linux system).
  There are a large number of functions, accessible through buttons on the
  right.
  The button on the left quits the program.
  and there is a status indicator at the bottom that dynamically updates
  based on the progress in analyzing the wave file.
+ This section (section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Analysis-Functionality"
+
+\end_inset
+
+) should be sufficient to operate the analysis software.
 \end_layout
 
 \begin_layout Subsubsection
 Calibrate .wav importer
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Calibrate-.wav-importer"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The input for this function is a wave file taken with a source in the Geiger
+ counter.
+ Further, it must included at least one full count within the first 
+\begin_inset Formula $5$
+\end_inset
+
+ seconds of the file.
+ This will return a display of the maximum pulse height, along with the
+ values surrounding it.
+ The student should calculate 
+\begin_inset Formula $90\%$
+\end_inset
+
+ of the pulse height.
+ This is the threshold.
+ If any of the variables in the experiment change (ie.
+ voltage, sample rate, etc), this threshold should be recalculated.
+ Therefore, it should generally be repeated at the beginning of each analysis
+ of a wave file.
+ If the file is imported from saved data, the threshold was already set
+ when the analysis was completed originally.
 \end_layout
 
 \begin_layout Subsubsection
 Import .wav File
 \end_layout
 
+\begin_layout Standard
+The input for this function is a wave file taken with a source in the Geiger
+ counter, for a length determined by information in the lab manual.
+ After the file is chosen, the threshold value, a number between 
+\begin_inset Formula $0$
+\end_inset
+
+ and 
+\begin_inset Formula $32767$
+\end_inset
+
+, which was determined in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Calibrate-.wav-importer"
+
+\end_inset
+
+, must be input.
+ The software will analyze the entire wave file, producing a data set.
+ Note: this can take quite a bit of time and processing power.
+ Therefore, it is important to be patient.
+\end_layout
+
 \begin_layout Subsubsection
 Import Saved Data
+\end_layout
+
+\begin_layout Standard
+If analysis has already been completed and the data set was saved, the data
+ set can be imported through this function.
+ Because it has already been analyzed, the import should be instantaneous.
+ Consequently, it is highly recommended to save each data set after it has
+ been analyzed initially.
 \end_layout
 
 \begin_layout Subsubsection
 Save Data to Disk
 \end_layout
 
+\begin_layout Standard
+Once the initial import analysis is complete, this function allow a user
+ to save the analyzed data to disk.
+ This function is extremely useful, as it allows the user to re-import the
+ data set in the future without having to rerun the long initial analysis
+ function.
+ Note: This function exports in a binary format.
+ For an export of the raw data, see section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Export-Data-in-Plaintext"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsubsection
 Export Data in Plaintext
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Export-Data-in-Plaintext"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This button exports the current data set into a CSV (comma-separated values)
+ file for use with other data analysis software.
+ The format is one line of header, followed by each count time on its own
+ line.
+ The only input is the save location, accessible through the file chooser
+ dialog window.
 \end_layout
 
 \begin_layout Subsubsection
 Plot Count Rate vs Time
 \end_layout
 
+\begin_layout Standard
+This button plots a graph of the count rate as a function of time for the
+ current data set.
+ The only input is the sample size, which represents the duration over which
+ the count rate is calculated for each point on the graph.
+ For example, for a 
+\begin_inset Formula $\unit[100]{s}$
+\end_inset
+
+ data set and 
+\begin_inset Formula $\unit[1]{s}$
+\end_inset
+
+ sample size, the graph will have 
+\begin_inset Formula $100$
+\end_inset
+
+ points, each identifying the average count rate over the 
+\begin_inset Formula $\unit[1]{s}$
+\end_inset
+
+ duration beginning at that point.
+\end_layout
+
 \begin_layout Subsubsection
 Plot Count Rate Histogram
+\end_layout
+
+\begin_layout Standard
+This button plots a histogram of the count rates of the current data set.
+ The two inputs are sample size and number of bins in the histogram.
+ The sample size represents the duration over which the count rate is calculated
+ for each element of the histogram.
+ For example, for a 
+\begin_inset Formula $\unit[100]{s}$
+\end_inset
+
+ data set and 
+\begin_inset Formula $\unit[1]{s}$
+\end_inset
+
+ sample size, the histogram will contain 
+\begin_inset Formula $100$
+\end_inset
+
+ elements, each containing the average count rate over a particular 
+\begin_inset Formula $\unit[1]{s}$
+\end_inset
+
+ segment of the data set.
 \end_layout
 
 \begin_layout Subsubsection
 Plot Intervals Histogram
 \end_layout
 
+\begin_layout Standard
+This button plots a histogram of the time interval between consecutive counts
+ in the current data set--so if there are 
+\begin_inset Formula $N$
+\end_inset
+
+ total counts, there will be 
+\begin_inset Formula $N-1$
+\end_inset
+
+ elements in the histogram.
+ The only input is the number of bins in the histogram.
+\end_layout
+
 \begin_layout Subsubsection
 Get Total Counts
 \end_layout
 
-\begin_layout Subsection
-File Output and Formats
+\begin_layout Standard
+This button opens a window displaying the total number of counts in the
+ current data set.
 \end_layout
 
 \begin_layout Subsection
 Further Documentation
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Further-Documentation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+This section assumes some familiarity with programming and computers.
+ If the user is not familiar, section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Analysis-Functionality"
+
+\end_inset
+
+ should be sufficient.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+I needed a new line, so this seemed like the best way to do it.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The analysis software is dependent on a number of built in python modules,
+ such as Tkinter, CSV and Pickle.
+ In addition, the software depends on the third party Matplotlib and Scipy
+ modules.
+ For Windows, the easiest way to install these modules is with a third party
+ python installation, such as 
+\begin_inset Formula $\mathtt{Python(x,y)}$
+\end_inset
+
+ (
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://code.google.com/p/pythonxy/
+\end_layout
+
+\end_inset
+
+).
+ For Mac or Linux, it is best to utilize pip, utilizing the commands 
+\begin_inset Formula $\mathtt{pip\: install\; matplotlib}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathtt{pip\: install\: scipy}$
+\end_inset
+
+.
+ Pip can be installed following the instructions listed at 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://www.pip-installer.org/en/latest/
+\end_layout
+
+\end_inset
+
+.
+ While Windows users could use pip, or *nix users could utilize a third
+ party python installation, the approaches recommended above have yielded
+ the best results for us.
 \end_layout
 
 \begin_layout Subsubsection
-Building Executables
+Code structure
+\end_layout
+
+\begin_layout Standard
+The code structure centers around two files, 
+\begin_inset Formula $\mathtt{GUI.py}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathtt{analyzeData.py}$
+\end_inset
+
+.
+ analyzeData is a python module that implements the back-end calculations
+ initiated from the GUI front-end.
+ The methods and members of the both files can be seen in 
+\begin_inset Formula $\mathtt{./documentation/GUI.html}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathtt{./documentation/analyzeData.html}$
+\end_inset
+
+.
+ These files are generated from documentation present in the source.
+ The comments and documentation are quite thorough, and together form better
+ documentation than could be explained otherwise.
+\end_layout
+
+\begin_layout Subsubsection
+Alternative Ways to Run the Analysis
+\end_layout
+
+\begin_layout Standard
+While most systems should be setup 
+\end_layout
+
+\begin_layout Subsubsection
+File Output and Formats
+\end_layout
+
+\begin_layout Standard
+As alluded to above there are a few different ways to export data from the
+ analysis software.
+\end_layout
+
+\begin_layout Subsubsection
+Building Executable
 \end_layout
 
 \end_body
