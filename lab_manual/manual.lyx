@@ -473,9 +473,12 @@ Gaussian Statistics
 \end_layout
 
 \begin_layout Standard
-The Central Limit Theorem of probability states that in the limit of a large
- number of samples, any probability distribution approaches the Gaussian
- or normal distribution.
+In the large 
+\begin_inset Formula $N$
+\end_inset
+
+ limit, the Poisson distribution converges to the Gaussian or normal distributio
+n.
  Consequently, if we use a source with a high count rate, we should see
  a Gaussian distribution of number of counts in a second.
  Use a source with a count rate roughly between 
@@ -496,6 +499,7 @@ The Central Limit Theorem of probability states that in the limit of a large
 \end_inset
 
  samples.
+ Use a graph to compare your results with a Gaussian distribution.
 \end_layout
 
 \end_body
