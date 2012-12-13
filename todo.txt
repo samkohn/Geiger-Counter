@@ -3,3 +3,4 @@ To Do:
 actually implement threshold sampling
 combine two data sets (append DataSets or something like that)
 export histograms as csv
+implement histogramming by bin width instead of number of bins
