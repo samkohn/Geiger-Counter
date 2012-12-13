@@ -1,0 +1,504 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Example Data and Analysis for Geiger Counter Lab
+\end_layout
+
+\begin_layout Author
+Raymond Ehlers
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\end_inset
+
+Sam Kohn
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+
+\backslash
+
+\end_layout
+
+\end_inset
+
+W
+\begin_inset Formula $3081$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+In this document, we exhibit and explain the data and analysis expected
+ of a student to complete the Geiger Counter, Counting Statistics, and Artificia
+l Radioactivity Lab.
+ Analyses accessible directly from the new GC Analysis software include
+ Poisson- and Gaussian-regime measurements and histograms, and interval
+ histograms.
+ With minimal additional effort, students can calculate the dead time of
+ the Geiger counter and the lifetimes of the artificial radioactivity sample.
+ With the assistance of a tool such as Python/SciPy/MatPlotLib or Matlab,
+ students can perform fits to their data and superimpose exact Poisson or
+ Gaussian curves onto their graphs.
+ We recommend that students use the Python suite because it integrates more
+ cleanly with GC Analysis.
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+There are a few goals for the Geiger Counter lab:
+\end_layout
+
+\begin_layout Itemize
+measure the count rate distributions for high-rate and low-rate sources
+ and thereby distinguish from Gaussian and Poisson statistics
+\end_layout
+
+\begin_layout Itemize
+differentiate between the time interval distributions for high-rate and
+ low-rate sources
+\end_layout
+
+\begin_layout Itemize
+measure the dead time of the Geiger counter
+\end_layout
+
+\begin_layout Itemize
+measure the lifetimes of the two artificial isotopes of 
+\begin_inset Formula $^{116}\textnormal{In}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Almost all of this analysis is achievable using the GC Analysis software
+ with minimal use of an external analysis tool such as Python or Mathematica.
+\end_layout
+
+\begin_layout Section
+Count Rate Distributions
+\end_layout
+
+\begin_layout Standard
+Students should be able to generate histograms and count rate vs.
+ time plots for various samples.
+ Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Poisson-statistics"
+
+\end_inset
+
+ shows the count rate as a function of time 
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename poisson_count_rate_curve.png
+	width 50col%
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Count rate vs.
+ time curve
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename poisson_distribution.png
+	width 50col%
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Corresponding histogram showing a Poisson distribution with a mean of 
+\begin_inset Formula $\unit[3]{Hz}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Poisson-statistics"
+
+\end_inset
+
+Poisson statistics
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ and the corresponding histogram for a low-count-rate sample with an average
+ count rate of 
+\begin_inset Formula $\unit[3.1]{Hz}$
+\end_inset
+
+ calculated by total counts divided by total time over a 
+\begin_inset Formula $\unit[16]{min}$
+\end_inset
+
+ data sample.
+ Figure 
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename gaussian_count_rate_curve.png
+	width 50col%
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Count rate vs.
+ time curve
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename gaussian_distribution.png
+	width 50col%
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Corresponding histogram showing a Gaussian distribution with a peak/mean
+ of 
+\begin_inset Formula $\sim\unit[65]{Hz}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Gaussian-statistics"
+
+\end_inset
+
+Gaussian statistics
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Gaussian-statistics"
+
+\end_inset
+
+ shows similar plots for a high-count-rate sample with an average count
+ rate of 
+\begin_inset Formula $\unit[67.75]{Hz}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Time Interval Distributions
+\end_layout
+
+\begin_layout Standard
+There is explicit functionality for plotting the distribution of time intervals
+ between consecutive counts.
+ Figure 
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename interval_low_count_rate.png
+	width 50col%
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Low count rate sample (Poisson-style)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename interval_high_count_rate.png
+	width 50col%
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+High count rate sample (Gaussian-style)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Time-interval-distributions"
+
+\end_inset
+
+Time interval distributions for Poisson and Gaussian-level statistics
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ displays histograms of time intervals for low-count-rate and high-count-rate
+ sources.
+ They are both supposed to be exponential decays, although it is evident
+ that the low-count-rate source did not exactly adhere to this distribution.
+\end_layout
+
+\end_body
+\end_document
