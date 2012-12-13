@@ -167,12 +167,12 @@ The Geiger Müller detector (GM tube) for ionizing particles operations on
 \begin_inset Formula $\sim\unit[25]{eV}$
 \end_inset
 
- of envergy loss, resulting in 
+ of energy loss, resulting in 
 \begin_inset Formula $\sim10$
 \end_inset
 
  free electrons in the gas of the GM tube.
- The electring field in the tube accelerates the initial electrons, which
+ The electric field in the tube accelerates the initial electrons, which
  in turn collide with the gas atoms to produce more electron-ion pairs.
  If the field is large enough, the multiplication becomes regenerative,
  a self sustaining chain reaction and, helped by de-excitation UV photons,
@@ -307,11 +307,11 @@ To test the connection, put one of the sources in the GM tube and close
  correct, you should see a very narrow spike in the Audacity waveform for
  each particle the GM tube detects.
  Stop the recording after a few seconds and play it back.
- If you hear a series of clicks, everyting is connected.
+ If you hear a series of clicks, everything is connected.
  If instead you hear sounds from the room, then the incorrect microphone
  is selected.
  If you hear nothing, it is possible the incorrect microphone is selected,
- or else there is a problem with a physical connection betwen the GM tube
+ or else there is a problem with a physical connection between the GM tube
  and the computer.
 \end_layout
 
@@ -551,7 +551,7 @@ With an appropriate understanding of the GM tube operation, we can use it
 \begin_inset Formula $e^{-10}\approx4.5\times10^{-5}$
 \end_inset
 
-, measuring the disintigration rate of the irradiated sample for longer
+, measuring the disintegration rate of the irradiated sample for longer
  than 
 \begin_inset Formula $\unit[5]{min}$
 \end_inset
