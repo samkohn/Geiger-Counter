@@ -307,6 +307,162 @@ The Waveform in Audacity
 \end_layout
 
 \begin_layout Standard
+One benefit of Audacity is that it illustrates the waveform of the data,
+ allowing users to investigate the shape of the waveform, similar to an
+ oscilloscope.
+ Based on this display, a number of properties may be determined.
+ The shape of the waveform will be determined by the specific Geiger counter,
+ as well as the performance of the sound card recording the data.
+ An example of the same pulse in recorded by two different sound cards can
+ be seen in figures 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Unclipped-waveform"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Clipped-wavform"
+
+\end_inset
+
+.
+ In figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Unclipped-waveform"
+
+\end_inset
+
+, the waveform is not clipped (truncated in amplitude) in the recording,
+ so all of the features of the waveform can clearly be seen.
+ In figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Clipped-wavform"
+
+\end_inset
+
+, the amplitude of waveform is clipped, such that some of the features cannot
+ be seen.
+ However, either type of waveform should be acceptable for analysis.
+ The relative scale on the left of both images is extremely important.
+ The analysis software depends on a user determined threshold for the necessary
+ height of a pulse to be considered a count by the software.
+ The Audacity scale is a
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/waveform.unclipped.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Unclipped waveform
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Unclipped-waveform"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/waveform.clipped.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Clipped wavform
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Clipped-wavform"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Waveforms in Audacity
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
