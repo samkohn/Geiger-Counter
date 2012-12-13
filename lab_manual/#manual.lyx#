@@ -387,18 +387,6 @@ Read the Parts
  Recall that the dead time is a period of insensitivity to new incoming
  particles because the anode is temporarily shielded by the ions from the
  previous cascade of electrons.
- Measure the dead time (and the error on your measurement) of the GM tube
- using the procedure outlined in the Rainwater and Wu article.
- The analysis software on the computer will give you access to the total
- number of counts (including background) from a sample.
-\end_layout
-
-\begin_layout Subsection
-Poisson Statistics
-\end_layout
-
-\begin_layout Standard
-The Poisson Distribution describes the probability of 
 \end_layout
 
 \end_body
