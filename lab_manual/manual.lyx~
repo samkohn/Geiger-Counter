@@ -389,7 +389,81 @@ Read the Parts
  previous cascade of electrons.
  Measure the dead time (and the error on your measurement) of the GM tube
  using the procedure outlined in the Rainwater and Wu article.
+ The analysis software on the computer will give you access to the total
+ number of counts (including background) from a sample.
+\end_layout
+
+\begin_layout Subsection
+Poisson Statistics
+\end_layout
+
+\begin_layout Standard
+The Poisson distribution describes the probability of detecting 
+\begin_inset Formula $n$
+\end_inset
+
+ events in a specified time (or space, or some other) range if they occur
+ with a known average of 
+\begin_inset Formula $N$
+\end_inset
+
+ in that same range.
+ The distribution is 
+\begin_inset Formula 
+\begin{equation}
+\frac{1}{n!}N^{n}e^{-N}\label{eq:Poisson Distribution}
+\end{equation}
+
+\end_inset
+
+and is also useful in situations such as calculating the chances of finding
  
+\begin_inset Formula $n$
+\end_inset
+
+ impurities in a sample of material when they occur with a known average
+ density 
+\begin_inset Formula $N$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+To see the Poisson distribution, take a 
+\begin_inset Formula $\unit[1000]{s}$
+\end_inset
+
+ measurement of a low-count-rate source, between roughly 
+\begin_inset Formula $\unit[2]{Hz}$
+\end_inset
+
+ and 
+\begin_inset Formula $\unit[5]{Hz}$
+\end_inset
+
+, and histogram the count rate using 
+\begin_inset Formula $\unit[1]{s}$
+\end_inset
+
+ samples, so that you have 
+\begin_inset Formula $1000$
+\end_inset
+
+ data points for the detection of 
+\begin_inset Formula $n$
+\end_inset
+
+ counts in a second and an expected average of 
+\begin_inset Formula $N$
+\end_inset
+
+ counts in a second.
+ The ratio of two points on your histogram corresponds to the ratio of the
+ probabilities that the corresponding number of counts will be detected
+ in one second.
+ Check a few ratios to see whether your results agree with the Poisson distribut
+ion, or normalize your histogram and check agreement directly.
 \end_layout
 
 \end_body
