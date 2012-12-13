@@ -79,11 +79,25 @@ Geiger Counter Lab Analysis Software
 Raymond Ehlers
 \end_layout
 
+\begin_layout Author Email
+
+rje2114@columbia.edu
+\end_layout
+
 \begin_layout Author
 Sam Kohn
 \end_layout
 
-\begin_layout Author
+\begin_layout Author Email
+
+sjk2163@columbia.edu
+\end_layout
+
+\begin_layout Affiliation
+Columbia University, Columbia College, Class of 2013
+\end_layout
+
+\begin_layout Abstract
 Abstract here...
 \end_layout
 
@@ -351,7 +365,30 @@ reference "fig:Clipped-wavform"
  The relative scale on the left of both images is extremely important.
  The analysis software depends on a user determined threshold for the necessary
  height of a pulse to be considered a count by the software.
- The Audacity scale is a
+ The Audacity scale is an arbitrary scale from 
+\begin_inset Formula $0$
+\end_inset
+
+ to 
+\begin_inset Formula $1$
+\end_inset
+
+, so the threshold can be calculated by multiply the fraction of the arbitrary
+ height by 
+\begin_inset Formula $32767$
+\end_inset
+
+ (the largest possible number in a signed 
+\begin_inset Formula $16$
+\end_inset
+
+-bit integer).
+ However, this scale is not particularly accurate, such that the threshold
+ should be determined in the analysis software, rather than based on the
+ Audacity scale.
+ This process is described in section .
+ Despite the inaccuracy of the Audacity scale, it is still useful as a sanity
+ check to ensure that the threshold is reasonable.
 \end_layout
 
 \begin_layout Standard
@@ -471,16 +508,107 @@ Analysis Software
 \end_layout
 
 \begin_layout Standard
-Usage of the software will first be described, followed by a more technical
- discussion of the code involved.
+First, software usage will be discussed, followed by a more technical discussion
+ of the code.
+ This analysis code was written by Raymond Ehlers and Sam Kohn, CC 2013.
 \end_layout
 
 \begin_layout Subsection
 Analysis Functionality
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/GUI.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The Geiger Counter analysis software
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:The-Geiger-Counter"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The analysis software can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:The-Geiger-Counter"
+
+\end_inset
+
+.
+ There are a large number of functions, accessible through buttons on the
+ right.
+ The button on the left quits the program.
+ and there is a status indicator at the bottom
+\end_layout
+
 \begin_layout Subsubsection
-Importing Data
+Calibrate .wav importer
+\end_layout
+
+\begin_layout Subsubsection
+Import .wav File
+\end_layout
+
+\begin_layout Subsubsection
+Import Saved Data
+\end_layout
+
+\begin_layout Subsubsection
+Save Data to Disk
+\end_layout
+
+\begin_layout Subsubsection
+Export Data in Plaintext
+\end_layout
+
+\begin_layout Subsubsection
+Plot Count Rate vs Time
+\end_layout
+
+\begin_layout Subsubsection
+Plot Count Rate Histogram
+\end_layout
+
+\begin_layout Subsubsection
+Plot Intervals Histogram
+\end_layout
+
+\begin_layout Subsubsection
+Get Total Counts
 \end_layout
 
 \begin_layout Subsection
@@ -489,6 +617,10 @@ File Output and Formats
 
 \begin_layout Subsection
 Further Documentation
+\end_layout
+
+\begin_layout Subsubsection
+Building Executables
 \end_layout
 
 \end_body

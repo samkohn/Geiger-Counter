@@ -518,11 +518,98 @@ Analysis Functionality
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename images/GUI.png
+
+\end_inset
+
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The Geiger Counter analysis software
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:The-Geiger-Counter"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The analysis software can be seen in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:The-Geiger-Counter"
+
+\end_inset
+
+.
+ There are a large number of functions, accessible through buttons on the
+ right.
+ The button on the left quits the program.
+ and there is a status indicator at the bottom that dynamically updates
+ based on the progress in analyzing the wave file.
+\end_layout
+
 \begin_layout Subsubsection
-Importing Data
+Calibrate .wav importer
+\end_layout
+
+\begin_layout Subsubsection
+Import .wav File
+\end_layout
+
+\begin_layout Subsubsection
+Import Saved Data
+\end_layout
+
+\begin_layout Subsubsection
+Save Data to Disk
+\end_layout
+
+\begin_layout Subsubsection
+Export Data in Plaintext
+\end_layout
+
+\begin_layout Subsubsection
+Plot Count Rate vs Time
+\end_layout
+
+\begin_layout Subsubsection
+Plot Count Rate Histogram
+\end_layout
+
+\begin_layout Subsubsection
+Plot Intervals Histogram
+\end_layout
+
+\begin_layout Subsubsection
+Get Total Counts
 \end_layout
 
 \begin_layout Subsection
@@ -531,6 +618,10 @@ File Output and Formats
 
 \begin_layout Subsection
 Further Documentation
+\end_layout
+
+\begin_layout Subsubsection
+Building Executables
 \end_layout
 
 \end_body
