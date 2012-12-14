@@ -754,7 +754,25 @@ reference "fig:Count-rates-evolving"
  to start taking data after removing the sample from the irradiation chamber.
  By the time we started taking data, the short half-life was probably mostly
  decayed.
- 
+ It is also important to note that the count rates are significantly reduced
+ for their expected values, based on experimental limitations related to
+ the geometry of the Geiger counter.
+ However, based on still receiving an expected signal for the longer half-life
+ sample, we may conclude that it was not a major source of error.
+\end_layout
+
+\begin_layout Section
+Conclusion
+\end_layout
+
+\begin_layout Standard
+With this analysis, we have completed the projects described in the lab
+ manual.
+ Furthermore, we have demonstrated that our software analysis package is
+ both accurate and effective.
+ While the experiment could still use some improvement, such as a new Geiger
+ tube that has better geometry for the artificial radioactivity section,
+ it now appears to be in a suitable state for students to use for the course.
 \end_layout
 
 \end_body
