@@ -497,7 +497,264 @@ Time interval distributions for Poisson and Gaussian-level statistics
  displays histograms of time intervals for low-count-rate and high-count-rate
  sources.
  They are both supposed to be exponential decays, although it is evident
- that the low-count-rate source did not exactly adhere to this distribution.
+ that the low-count-rate source did not exactly adhere to this distribution
+ in the near-zero region.
+\end_layout
+
+\begin_layout Section
+Dead Time Measurement
+\end_layout
+
+\begin_layout Standard
+The dead time is easily recovered via Rainwater and Wu's formula of 
+\begin_inset Formula $\tau=$
+\end_inset
+
+
+\begin_inset Formula $\frac{n_{1}+n_{2}-n_{12}}{2n_{1}n_{2}}$
+\end_inset
+
+, where 
+\begin_inset Formula $n_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{2}$
+\end_inset
+
+ are the background-subtracted count rates of two separate sources and 
+\begin_inset Formula $n_{12}$
+\end_inset
+
+ is the background-subtracted count rate of the two sources combined.
+ (Note: we measured a background rate of 
+\begin_inset Formula $0$
+\end_inset
+
+ over the course of 
+\begin_inset Formula $\unit[10]{min}$
+\end_inset
+
+.) The error is given as 
+\begin_inset Formula $\sigma=\frac{1}{n_{1}n_{2}}\left(\frac{n_{12}}{2T}\right)^{\nicefrac{1}{2}}$
+\end_inset
+
+, where 
+\begin_inset Formula $T$
+\end_inset
+
+ is the duration of the time sample.
+ In one measurement we took, 
+\begin_inset Formula $T=\unit[300]{s}$
+\end_inset
+
+, 
+\begin_inset Formula $n_{1}=\unit[15.513]{Hz},n_{2}=\unit[51.66]{Hz},n_{12}=\unit[67.747]{Hz},$
+\end_inset
+
+ and 
+\begin_inset Formula $\tau=\unit[-2.95\times10^{-4}]{s}$
+\end_inset
+
+, which we realize is a negative number.
+ Indeed, 
+\begin_inset Formula $n_{1}+n_{2}-n_{12}=\unit[-0.473]{Hz}$
+\end_inset
+
+, so it seems that by a slim margin, we had more counts than we would expect
+ to have on average when we measured both samples together.
+ The error on our measurement is 
+\begin_inset Formula $\sigma=\unit[4.19\times10^{-4}]{s}$
+\end_inset
+
+, meaning that our measurement is still within one standard deviation of
+ being positive (and hence at least statistically speaking it is reasonable).
+ Presumably, with larger 
+\begin_inset Formula $T$
+\end_inset
+
+ and higher count rates, students will be able to measure the dead time
+ more accurately.
+\end_layout
+
+\begin_layout Section
+Artificial Radioactivity
+\end_layout
+
+\begin_layout Standard
+The two lifetimes of irradiated 
+\begin_inset Formula $^{116}\textnormal{In}$
+\end_inset
+
+ can be calculated by comparing the initial count rate with the count rate
+ after 
+\begin_inset Formula $\unit[1]{min}$
+\end_inset
+
+; and the rate after 
+\begin_inset Formula $\unit[5]{min}$
+\end_inset
+
+ with the rate after 
+\begin_inset Formula $\unit[1]{hr}.$
+\end_inset
+
+ Figure 
+\begin_inset Float figure
+wide false
+sideways true
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename indium_long_life.png
+	width 33col%
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The long half-life: from 
+\begin_inset Formula $\sim\unit[1.45]{Hz}$
+\end_inset
+
+ to 
+\begin_inset Formula $\sim\unit[0.75]{Hz}$
+\end_inset
+
+ in 
+\begin_inset Formula $\unit[1]{hr}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename indium_short_life.png
+	width 33col%
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+The short half-life
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename indium_long_life_zoom.png
+	width 33col%
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+A zoomed-in version of the long half life curve
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Count-rates-evolving"
+
+\end_inset
+
+Count rates evolving over time for artificially irradiated 
+\begin_inset Formula $^{116}\textnormal{In}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Count-rates-evolving"
+
+\end_inset
+
+ shows the average count rate as a function of time for the long and short
+ half-lives.
+ The long half-life measurement seems to be successful since the count rate
+ dropped by about half over the course of an hour, as expected.
+ The short half-life measurement was not successful--it looks just like
+ the zoomed-in long half life plot, probably because we waited too long
+ to start taking data after removing the sample from the irradiation chamber.
+ By the time we started taking data, the short half-life was probably mostly
+ decayed.
+ 
 \end_layout
 
 \end_body
