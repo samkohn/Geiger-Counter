@@ -113,7 +113,7 @@ Geiger Counters
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Graphics
@@ -138,8 +138,8 @@ g
 
 \end_inset
 
-The Geiger Müller detector (GM tube) for ionizing particles operations on
- the principle of gas multiplication of the initial small number of electrons
+The Geiger Müller detector (GM tube) for ionizing particles operates on
+ the principle of gas multiplication of the small initial number of electrons
  freed by ionizing particles they encounter.
  Relativistic charged particles lose 
 \begin_inset Formula $\sim\unit[1300]{eV}$
@@ -196,8 +196,8 @@ The Geiger Müller detector (GM tube) for ionizing particles operations on
 .
  The multiplication mechanism is further controlled by quenching components
  (alcohols or halogens).
- These components also prevent restart of the regenerative discharge by
- absorbing de-excitation UV photons and by positive charge transfer from
+ These components also prevent the restart of the regenerative discharge
+ by absorbing de-excitation UV photons and by positive charge transfer from
  the Argon ions.
  The GM tube was the first detector sensitive to single particles because
  of the large electric signal it produces.
@@ -313,6 +313,7 @@ To test the connection, put one of the sources in the GM tube and close
  If you hear nothing, it is possible the incorrect microphone is selected,
  or else there is a problem with a physical connection between the GM tube
  and the computer.
+ See the software manual for more information on appropriate settings.
 \end_layout
 
 \begin_layout Subsection
@@ -496,11 +497,7 @@ n.
 \end_inset
 
  measurement.
- Again, histogram the count rate using 
-\begin_inset Formula $\unit[1]{s}$
-\end_inset
-
- samples.
+ Again, histogram the count rate.
  Use a graph to compare your results with a Gaussian distribution.
 \end_layout
 
@@ -568,7 +565,7 @@ With an appropriate understanding of the GM tube operation, we can use it
 \begin_inset Formula $^{116}\textnormal{In}$
 \end_inset
 
- with assistance from the TA or supervisor.
+ with assistance from a TA or lab supervisor.
 \end_layout
 
 \begin_layout Standard

@@ -80,7 +80,6 @@ Raymond Ehlers
 \end_layout
 
 \begin_layout Author Email
-
 rje2114@columbia.edu
 \end_layout
 
@@ -89,7 +88,6 @@ Sam Kohn
 \end_layout
 
 \begin_layout Author Email
-
 sjk2163@columbia.edu
 \end_layout
 
@@ -161,10 +159,8 @@ reference "fig:The-Audacity-upper-interface"
 \end_inset
 
 .
- However, this general begins recording the microphone, which is not particularl
-y useful for this experiment.
- A number of options, which will be described below, must be setup to record
- the data correctly.
+ However, a number of options must be setup to record the data correctly,
+ which will be described below.
 \end_layout
 
 \begin_layout Subsection
@@ -173,7 +169,7 @@ Recording Data Using Audacity
 
 \begin_layout Standard
 To process the recorded data correctly, the sampling characteristics must
- be set.
+ be set before recording.
  To specify these settings, open the Audacity sampling preferences under
  
 \begin_inset Formula $\mathtt{Edit->Preferences->Quality}$
@@ -183,8 +179,11 @@ To process the recorded data correctly, the sampling characteristics must
 \begin_inset Formula $\mathtt{Audacity->Preferences->Quality}$
 \end_inset
 
- on Mac OS X), and set the Default Sample Rate(recommended in the lab manual)
- and Default Sample Format (this must be 
+ on Mac OS X), and set the Default Sample Rate(recommended value of 
+\begin_inset Formula $96000\ Hz$
+\end_inset
+
+) and Default Sample Format (this must be 
 \begin_inset Formula $16$
 \end_inset
 
@@ -251,6 +250,8 @@ Integrated Microphone Array
 
  in the figure, determines the source of the audio.
  Finding the appropriate source is described in the lab manual.
+ In short, unless you are very familiar with the computer, it is effectively
+ trial and error.
  The drop-down menu to the farthest right must be set to 
 \begin_inset Formula $1$
 \end_inset
@@ -268,8 +269,8 @@ Timing the recording
 \begin_layout Standard
 While recording can be completed manual in Audacity, for this lab, it is
  convenient to set Audacity to record for a specified length of time.
- This will allow the student to avoid a need to cut down the audio file
- after recording.
+ This will allow the student to avoid a need to edit the audio file after
+ recording.
  This feature is accessible under 
 \begin_inset Formula $\mathtt{Transport->Timer\ Record...}$
 \end_inset
@@ -371,7 +372,8 @@ reference "fig:Clipped-wavform"
 , the amplitude of waveform is clipped, such that some of the features cannot
  be seen.
  However, either type of waveform should be acceptable for analysis.
- The relative scale on the left of both images is extremely important.
+ It is important to note the relative scale on the left of both images as
+ a check of the threshold value.
  The analysis software depends on a user determined threshold for the necessary
  height of a pulse to be considered a count by the software.
  The Audacity scale is an arbitrary scale from 
@@ -395,7 +397,14 @@ reference "fig:Clipped-wavform"
  However, this scale is not particularly accurate, such that the threshold
  should be determined in the analysis software, rather than based on the
  Audacity scale.
- This process is described in section .
+ This process is described in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Calibrate-.wav-importer"
+
+\end_inset
+
+.
  Despite the inaccuracy of the Audacity scale, it is still useful as a sanity
  check to ensure that the threshold is reasonable.
 \end_layout
@@ -520,7 +529,7 @@ Analysis Software
 First, software usage will be discussed, followed by a more technical discussion
  of the code.
  This analysis code was written by Raymond Ehlers and Sam Kohn, CC 2013.
- If major issues are encountered, feel free to contract either of us.
+ If major issues are encountered, feel free to contact either of us.
 \end_layout
 
 \begin_layout Subsection
@@ -607,16 +616,9 @@ reference "sub:Further-Documentation"
  There are a large number of functions, accessible through buttons on the
  right.
  The button on the left quits the program.
- and there is a status indicator at the bottom that dynamically updates
- based on the progress in analyzing the wave file.
- This section (section 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "sub:Analysis-Functionality"
-
-\end_inset
-
-) should be sufficient to operate the analysis software.
+ There is a status indicator at the bottom that dynamically updates based
+ on the progress in analyzing the wave file.
+ The following operations describe the operation of the analysis software.
 \end_layout
 
 \begin_layout Subsubsection
@@ -651,7 +653,8 @@ The input for this function is a wave file taken with a source in the Geiger
  Therefore, it should generally be repeated at the beginning of each analysis
  of a wave file.
  If the file is imported from saved data, the threshold was already set
- when the analysis was completed originally.
+ when the analysis was completed originally and hence the threshold determined
+ here is not necessary.
 \end_layout
 
 \begin_layout Subsubsection
@@ -678,8 +681,18 @@ reference "sub:Calibrate-.wav-importer"
 
 , must be input.
  The software will analyze the entire wave file, producing a data set.
- Note: this can take quite a bit of time and processing power.
+ Note: this can take quite a bit of time and processing power (on our modern
+ laptops, we were processing about 
+\begin_inset Formula $1$
+\end_inset
+
+ second of data in 
+\begin_inset Formula $1$
+\end_inset
+
+ second).
  Therefore, it is important to be patient.
+ The progress is displayed at the bottom of the window.
 \end_layout
 
 \begin_layout Subsubsection
@@ -706,10 +719,10 @@ name "sub:Save-Data-to-Disk"
 \end_layout
 
 \begin_layout Standard
-Once the initial import analysis is complete, this function allow a user
+Once the initial import analysis is complete, this function allow a student
  to save the analyzed data to disk.
- This function is extremely useful, as it allows the user to re-import the
- data set in the future without having to rerun the long initial analysis
+ This function is extremely useful, as it allows the student to re-import
+ the data set in the future without having to rerun the long initial analysis
  function.
  Note: This function exports in a binary format.
  For an export of the raw data, see section 
@@ -806,7 +819,7 @@ Plot Intervals Histogram
 
 \begin_layout Standard
 This button plots a histogram of the time interval between consecutive counts
- in the current data set--so if there are 
+ in the current data set---so if there are 
 \begin_inset Formula $N$
 \end_inset
 
@@ -840,7 +853,7 @@ name "sub:Further-Documentation"
 
 \begin_layout Paragraph
 This section assumes some familiarity with programming and computers.
- If the user is not familiar, section 
+ If the student is not familiar, section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Analysis-Functionality"
@@ -867,7 +880,7 @@ I needed a new line, so this seemed like the best way to do it.
 \begin_layout Standard
 The analysis software can be found on Github at 
 \begin_inset Flex URL
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -876,16 +889,16 @@ https://github.com/musicalrunner/Geiger-Counter
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
-The analysis software is written in python, and is dependent on a number
- of built in python modules, such as Tkinter, CSV and Pickle.
- In addition, the software depends on the third party Matplotlib and Scipy
+The analysis software is written in Python, and is dependent on a number
+ of built in Python modules, such as Tkinter, CSV and Pickle.
+ In addition, the software depends on the third party MatPlotLib and SciPy
  modules.
  For Windows, the easiest way to install these modules is with a third party
- python installation, such as 
+ Python installation, such as 
 \begin_inset Formula $\mathtt{Python(x,y)}$
 \end_inset
 
@@ -932,8 +945,12 @@ Code structure
 \end_layout
 
 \begin_layout Standard
-The code structure centers around two files, 
+The code structure centers around three files, 
 \begin_inset Formula $\mathtt{GUI.py}$
+\end_inset
+
+, 
+\begin_inset Formula $\mathtt{PlotData.py}$
 \end_inset
 
  and 
@@ -941,7 +958,8 @@ The code structure centers around two files,
 \end_inset
 
 .
- GUI is the front end, which utilizes the analyzeData python module.
+ GUI is the front end, which utilizes the analyzeData Python module and
+ the PlotData graphing module.
  The analyzeData module implements the back-end functionality through an
  object called DataSet.
  The methods and members of the both files can be seen in 
@@ -978,18 +996,16 @@ reference "sub:Save-Data-to-Disk"
  Further, if the members of the DataSet object are changed, it cannot be
  guaranteed that Pickle will correctly re-expand the DataSet object to a
  functional state.
- In principle, it should be fine unless DataSet is changed to depend on
- a variable existing that had no previous, while also not accounting for
- this during the importing process.
- In summary, it can be edited, but it must be done carefully.
+ In summary, you can edit the DataSet object members, but it must be done
+ carefully with lots of testing for backwards compatibility.
  Despite these potential difficulties, Pickle is preferred method, as it
  greatly simplifies the I/O process.
 \end_layout
 
 \begin_layout Standard
-If one desires to do analysis on the counts without such overhead, they
- can be exported into a CSV, return separated file using the Export Data
- in Plaintext function described in section 
+If one desires to do analysis using another analysis package on the counts
+ without such overhead, the data can be exported into a CSV, return separated
+ file using the Export Data in Plaintext function described in section 
 \begin_inset CommandInset ref
 LatexCommand ref
 reference "sub:Export-Data-in-Plaintext"
@@ -998,11 +1014,11 @@ reference "sub:Export-Data-in-Plaintext"
 
 .
  The file format is described in that section.
- As noted, it cannot be re-imported.
+ As noted, it cannot be re-imported into the GC Analysis software.
  It should be fairly trivial to implement the import process for the count
  times, but one may be left without necessary values for a full DataSet
- object.
- It is much simpler to use Save Data to Disk instead.
+ object, such as sample rate.
+ It is much simpler (and already implemented) to use Save Data to Disk instead.
 \end_layout
 
 \begin_layout Subsubsection

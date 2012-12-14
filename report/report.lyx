@@ -111,7 +111,7 @@ In this document, we exhibit and explain the data and analysis expected
  of a student to complete the Geiger Counter, Counting Statistics, and Artificia
 l Radioactivity Lab.
  Analyses accessible directly from the new GC Analysis software include
- Poisson- and Gaussian-regime measurements and histograms, and interval
+ Poisson- and Gaussian-regime measurements and histograms, as well as interval
  histograms.
  With minimal additional effort, students can calculate the dead time of
  the Geiger counter and the lifetimes of the artificial radioactivity sample.
@@ -405,10 +405,6 @@ sideways false
 status collapsed
 
 \begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Float figure
 wide false
 sideways false
@@ -494,11 +490,19 @@ Time interval distributions for Poisson and Gaussian-level statistics
 
 \end_inset
 
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Time-interval-distributions"
+
+\end_inset
+
  displays histograms of time intervals for low-count-rate and high-count-rate
  sources.
  They are both supposed to be exponential decays, although it is evident
  that the low-count-rate source did not exactly adhere to this distribution
  in the near-zero region.
+ Nonetheless, the general shape of an exponential holds for both.
 \end_layout
 
 \begin_layout Section
@@ -750,15 +754,15 @@ reference "fig:Count-rates-evolving"
  The long half-life measurement seems to be successful since the count rate
  dropped by about half over the course of an hour, as expected.
  The short half-life measurement was not successful--it looks just like
- the zoomed-in long half life plot, probably because we waited too long
- to start taking data after removing the sample from the irradiation chamber.
+ the zoomed-in long half life plot, probably because we were unable to start
+ taking data right after removing the sample from the irradiation chamber.
  By the time we started taking data, the short half-life was probably mostly
  decayed.
  It is also important to note that the count rates are significantly reduced
  for their expected values, based on experimental limitations related to
  the geometry of the Geiger counter.
- However, based on still receiving an expected signal for the longer half-life
- sample, we may conclude that it was not a major source of error.
+ However, we still received an expected signal for the longer half-life
+ sample, so we may conclude that it was not a major source of error.
 \end_layout
 
 \begin_layout Section
@@ -766,10 +770,9 @@ Conclusion
 \end_layout
 
 \begin_layout Standard
-With this analysis, we have completed the projects described in the lab
- manual.
- Furthermore, we have demonstrated that our software analysis package is
- both accurate and effective.
+With this analysis, we have completed the goals of this lab.
+ Furthermore, we have demonstrated that our the GC Analysis software package
+ is both accurate and effective.
  While the experiment could still use some improvement, such as a new Geiger
  tube that has better geometry for the artificial radioactivity section,
  it now appears to be in a suitable state for students to use for the course.
