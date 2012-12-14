@@ -865,6 +865,21 @@ I needed a new line, so this seemed like the best way to do it.
 \end_layout
 
 \begin_layout Standard
+The analysis software can be found on Github at 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+https://github.com/musicalrunner/Geiger-Counter
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 The analysis software is written in python, and is dependent on a number
  of built in python modules, such as Tkinter, CSV and Pickle.
  In addition, the software depends on the third party Matplotlib and Scipy
