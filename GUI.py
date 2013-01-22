@@ -302,7 +302,23 @@ class App:
 
     def showThresholdGraph(self):
         '''Shows a graph of the .wav amplitudes so that the user can figure out a good threshold'''
-        pass
+        #pass
+        #import the first 5 seconds of the .wav file
+
+        #prompt for file name
+        filename = tkfd.askopenfilename(title="Pick your .wav file", initialdir=".", parent=self.root)
+        if not filename:
+            return
+
+        rate, wavData = ad.DataSet.readWaveFile(filename)
+        #get the first 5 seconds of data
+        numEntriesFor5Sec = rate * 5;
+        first5Sec = wavData[1:numEntriesFor5Sec];
+        
+        #plot data
+        pd.plot(first5Sec, "Calibrate the Threshold!")
+
+
 
         
 

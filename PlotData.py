@@ -68,6 +68,17 @@ def plotHistOfIntervals(data, numOfBins = 10):
     graph.set_title("Hist of interval between consecutive counts. " + str(numOfBins) + " bins, bin width = " + str(bins[1]-bins[0]) + " sec.")
     pp.show()
 
+def plot(stuff, title):
+    '''Plot a simple graph of any array'''
+
+    graph = pp.figure().add_subplot(111)
+
+    graph.plot(stuff)
+
+    graph.set_title(title)
+
+    pp.show()
+
 def main():
     '''All times are in seconds'''
     data = ad.readInput('test.txt')
