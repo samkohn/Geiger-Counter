@@ -102,7 +102,10 @@ class App:
         #boolean for if the current data is during a count or not during a count
         # 0 means no count, 1 means count
         aboveThreshold = 0
-
+        
+        # Print the total number of data points as reference to the user
+        print "Total number of data points: ", len(wavData)
+        
         #loop through data and grab count times
         for i, level in enumerate(wavData):
             #update the progress label every second (i % rate == 0)

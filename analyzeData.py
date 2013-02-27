@@ -49,7 +49,7 @@ class DataSet:
             
         # Displays a progress meter in the console.
         if i % rate == 0:
-            print "Analyzed " + str(i/rate) + "seconds"
+            print "Analyzed " + str(i/rate) + " seconds"
 
         # If the level is below the threshold, ignore it. Otherwise, if it is above the threshold, save the start
         # time of the level.
